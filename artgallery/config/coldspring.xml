@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans>
+
+    <bean id="artDAO" class="artgallery.model.art.artDAO">
+        <constructor-arg name="artgalleryDSN">
+            <value>artgallery</value>
+        </constructor-arg>
+    </bean>
+
+    <bean id="artGateway" class="artgallery.model.art.artGateway">
+        <constructor-arg name="artgalleryDSN">
+            <value>artgallery</value>
+        </constructor-arg>
+    </bean>
+
+    <bean id="artistDAO" class="artgallery.model.artists.artistDAO">
+        <constructor-arg name="artgalleryDSN">
+            <value>artgallery</value>
+        </constructor-arg>
+    </bean>
+
+    <bean id="artistGateway" class="artgallery.model.artists.artistGateway">
+        <constructor-arg name="artgalleryDSN">
+            <value>artgallery</value>
+        </constructor-arg>
+    </bean>
+
+    <bean id="artist" class="artgallery.model.artists.artist">
+    </bean>
+
+    <bean id="art" class="artgallery.model.art.art">
+    </bean>
+
+    <bean id="artGalleryService" class="artgallery.model.artgalleryService">
+        <property name="artDAO">
+            <ref bean="artDAO"/>
+        </property>
+        <property name="artGateway">
+            <ref bean="artGateway"/>
+        </property>
+        <property name="artistDAO">
+            <ref bean="artistDAO"/>
+        </property>
+        <property name="artistGateway">
+            <ref bean="artistGateway"/>
+        </property>
+        <property name="artist">
+            <ref bean="artist"/>
+        </property>
+        <property name="art">
+            <ref bean="art"/>
+        </property>
+    </bean>
+
+</beans>

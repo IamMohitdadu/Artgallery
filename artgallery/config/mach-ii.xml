@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mach-ii version="1.0">
+
+    <!-- INCLUDES -->
+    <includes>
+        <include file="./mach-ii_coldspringProperty.xml" />
+    </includes>
+
+    <!-- PROPERTIES -->
+    <properties>
+        <property name="applicationRoot" value="/artgallery" />
+        <property name="defaultEvent" value="home" />
+        <property name="eventParameter" value="event" />
+        <property name="parameterPrecedence" value="form" />
+        <property name="maxEvents" value="10" />
+        <property name="exceptionEvent" value="exceptionEvent" />
+        <property name="sessionProperty" type="artgallery.properties.SessionProperty" />
+    </properties>
+
+    <!-- LISTENERS -->
+    <listeners>
+        <listener name="artgalleryListener" type="listener.artgalleryListener" />
+    </listeners>
+
+    <!-- EVENT-FILTERS -->
+    <event-filters>
+        <!--
+        <event-filter name="yourEventFilterName" type="fully.Qualified.Dot.Delimited.Path.To.CFC">
+            <parameters>
+                <parameter name="yourParameterName" value="yourParameterValue" />
+            </parameters>
+        </event-filter>
+        -->
+
+        <event-filter name="validateUser" type="filter.validateUser" />
+
+    </event-filters>
+
+    <!-- PLUGINS -->
+    <plugins>
+        <!--
+        <plugin name="yourPluginName" type="fully.Qualified.Dot.Delimited.Path.To.CFC">
+            <parameters>
+                <parameter name="yourParameterName" value="yourParameterValue" />
+            </parameters>
+        </plugin>
+        -->
+    </plugins>
+
+    <!-- EVENT-HANDLERS -->
+    <event-handlers>
+        <!-- For Home Page -->
+        <event-handler event="home" access="public">
+            <even-arg name="pageTitle" value="Home" />
+            <view-page name="header" />
+            <view-page name="nav" />
+            <view-page name="home" />
+            <!-- <view-page name="bootstrapModel" /> -->
+            <view-page name="footer" />
+        </event-handler>
+
+        <!-- For login/signup Page -->
+        <event-handler event="login" access="public">
+            <even-arg name="pageTitle" value="login" />
+            <view-page name="header" />
+            <view-page name="nav" />
+            <view-page name="login" />
+            <!-- <view-page name="bootstrapModel" /> -->
+            <view-page name="footer" />
+        </event-handler>
+
+        <!-- For Add image Page -->
+        <event-handler event="addArt" access="public">
+            <even-arg name="pageTitle" value="Add Art" />
+            <view-page name="header" />
+            <view-page name="nav" />
+            <view-page name="addArt" />
+            <view-page name="footer" />
+        </event-handler>
+
+        <!-- For Gallery Page -->
+        <event-handler event="gallery" access="public">
+            <notify listener="artgalleryListener" method="GetArt" resultArg="qArtList" />
+            <even-arg name="pageTitle" value="gallery" />
+            <view-page name="header" />
+            <view-page name="nav" />
+            <view-page name="gallery" />
+            <!-- <view-page name="bootstrapModel" /> -->
+            <view-page name="footer" />
+
+        </event-handler>
+
+        <!-- For successful login -->
+     <!--    <event-handler event="pass" access="private">
+            <announce event="gallery" copyEventArgs="true" />
+        </event-handler>
+ -->
+        <!-- for failed login -->
+<!--         <event-handler event="fail" access="private">
+            <redirect event="login" copyEventArgs="true" />
+        </event-handler> -->
+
+        <!-- For Login -->
+        <event-handler event="loginProcess" access="public">
+<!--             <filter name="validateUser">
+                <parameter name="Validate" value="login" />
+            </filter> -->
+            <event-mapping event="pass" mapping="gallery" />
+            <event-mapping event="fail" mapping="login" />
+            <notify listener="artgalleryListener" method="Login"/>
+        </event-handler>
+
+        <!-- For Registration -->
+        <event-handler event="RegistrationProcess" access="public">
+<!--             <filter name="validateUser">
+                <parameter name="Validate" value="registration" />
+            </filter> -->
+
+            <!-- <event-mapping event="login" mapping="login" /> -->
+            <notify listener="artgalleryListener" method="Registration" />
+            <announce event="login" copyEventArgs="true" />
+            <!-- <redirect event="login" persist="true" /> -->
+        </event-handler>
+
+        <!-- For adding art -->
+        <event-handler event="addArtProcess" access="public">
+            <notify listener="artgalleryListener" method="AddArt"/>
+            <announce event="addArt" copyEventArgs="true" />
+        </event-handler>
+
+        <!-- Update art active status -->
+        <event-handler event="updateArtStatus" access="public">
+            <notify listener="artgalleryListener" method="UpdateArtStatus"/>
+        </event-handler>
+
+        <!-- for logout -->
+        <event-handler event="logout" access="public">
+            <notify listener="artgalleryListener" method="Logout"/>
+            <redirect event="home" />
+        </event-handler>
+
+        <!-- for upload/change profile image -->
+        <event-handler event="uploadProfileImage" access="public">
+            <notify listener="artgalleryListener" method="ChangeProfileImage"/>
+            <announce event="gallery" copyEventArgs = "true" />
+        </event-handler>
+
+        <!-- for edit profile details -->
+        <event-handler event="EditProfile" access="public">
+            <notify listener="artgalleryListener" method="EditProfile"/>
+            <announce event="gallery" copyEventArgs = "true" />
+        </event-handler>
+
+        <!-- sample event handler that uses caching and the default cache (data cached for 1 hour in application scope) -->
+        <!--
+        <event-handler event="useCache" access="public">
+            <cache>
+                <notify listener="SomeListener" method="getDataForCache" resultArg="cachedData" />
+            </cache>
+        </event-handler>
+        -->
+
+        <!-- sample event handler that uses message/subscriber listener notification -->
+        <!--
+        <event-handler event="messagePublisher" access="public">
+            <publish message="needStuff" />
+        </event-handler>
+        -->
+
+        <event-handler event="exceptionEvent" access="private">
+            <even-arg name="pageTitle" value="Exception" />
+            <view-page name="header" />
+            <view-page name="nav" />
+            <view-page name="exception" />
+            <view-page name="footer" />
+        </event-handler>
+    </event-handlers>
+
+    <!-- SUBROUTINES -->
+    <subroutines>
+        <!--
+        <subroutine name="layout.main">
+            <view-page name="layout.header" contentArg="layout.header"/>
+            <view-page name="layout.footer" contentArg="layout.footer"/>
+            <view-page name="layout.wrapper"/>
+        </subroutine>
+         -->
+    </subroutines>
+
+    <!-- PAGE-VIEWS -->
+    <page-views>
+        <!--
+        This loads all pages which match /views/**/*.cfm, so a page-view called home would
+        translate to /views/home.cfm and page-view called aboutUs.index would translate to
+        /views/aboutUs/index.cfm
+        -->
+        <page-view name="home" page="/views/home.cfm" />
+        <page-view name="login" page="/views/login.cfm" />
+        <page-view name="addArt" page="/views/addArt.cfm" />
+        <page-view name="gallery" page="/views/gallery.cfm" />
+        <!-- <page-view name="exception" page="/views/template/404.cfm" /> -->
+        <page-view name="exception" page="/views/exception.cfm" />
+        <page-view name="header" page="/views/layouts/header.cfm" />
+        <page-view name="bootstrapModel" page="/views/layouts/bootstrapModel.cfm" />
+        <page-view name="nav" page="/views/layouts/nav.cfm" />
+        <page-view name="footer" page="/views/layouts/footer.cfm" />
+
+    </page-views>
+
+</mach-ii>
