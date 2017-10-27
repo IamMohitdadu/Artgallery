@@ -7,6 +7,7 @@
 
 <cfcomponent output="false">
 
+    <!--- constructor - init --->
     <cffunction name="init" access="public" output="false" returntype="model.artgalleryService">
         <cfset VARIABLES.artDAO = 0 />
         <cfset VARIABLES.artGateway = 0 />
@@ -66,19 +67,15 @@
         <cfif arrayIsEmpty(LOCAL.validate) >
             <!--- validate user details into database --->
             <cfset LOCAL.validUser = VARIABLES.artistGateway.CheckUser(argumentCollection=arguments) />
+
             <cfif LOCAL.validUser.success EQ true>
                 <!--- Set SESSION for valid user --->
                 <cfset SESSION.user['USERID'] = LOCAL.validUser.data.USERID />
-                <!--- <cfdump var="#SESSION.user#"/><cfabort> --->
                 <cfset SESSION.user['NAME'] = LOCAL.validUser.data.NAME />
                 <cfset SESSION.user['EMAIL'] = LOCAL.validUser.data.EMAIL />
                 <cfset SESSION.user['IMAGEADDRESS'] = LOCAL.validUser.data.IMAGEADDRESS />
-<!---
-                <cfset REQUEST.SESSIONFacade = getProperty("SESSIONFacade") />
-                <cfset REQUEST.SESSIONFacade.setSESSIONVar('USERID', LOCAL.validUser.data.USERID) />
-                <cfdump var="#REQUEST.SESSIONFacade.getSESSIONVar('UserID')#" /><cfabort> --->
-
             </cfif>
+
         <cfelse>
             <!--- Set error message structure --->
             <cfset LOCAL.ValidUser.data = arrayNew(3) />
@@ -109,9 +106,6 @@
         <!--- add user data into database --->
         <cfif arrayIsEmpty(LOCAL.validate) >
             <cfset LOCAL.ValidUser = VARIABLES.artistGateway.RegisterUser(argumentCollection=arguments) />
-            <!--- <cfif LOCAL.ValidUser EQ true>
-                <cfreturn true />
-            </cfif> --->
         <cfelse>
             <cfset LOCAL.ValidUser.data = arrayNew(3) />
             <cfset LOCAL.validUser.success = false />
@@ -119,7 +113,6 @@
         </cfif>
 
         <cfreturn LOCAL.ValidUser />
-        <!--- <cfreturn false /> --->
     </cffunction>
 
     <!---
@@ -177,10 +170,12 @@
         to logout user
     --->
     <cffunction name="LogoutUser" access="public" output="false" returnType="void" hint="logout the artist">
+
         <!--- Delete SESSION VARIABLES --->
         <cfif structKeyExists(SESSION,'user')>
             <cfset structDelete(SESSION,'user') />
         </cfif>
+
     </cffunction>
 
     <!---
@@ -225,9 +220,11 @@
         <cfif arrayIsEmpty(LOCAL.validateProfile) >
             <cfset LOCAL.profileUpdated = VARIABLES.artistGateway.UpdateUser(argumentCollection=arguments) />
 
+            <!--- check for successfully update profile --->
             <cfif LOCAL.profileUpdated EQ true>
                 <cfreturn true />
             </cfif>
+
         </cfif>
 
         <cfreturn false />

@@ -4,6 +4,7 @@
 * Date: 09/29/2017
 -->
 
+<!--- Check for session varioables --->
 <cfif not structKeyExists(SESSION, 'USER') >
   <cflocation url="/artgallery/" addtoken="false">
 </cfif>
@@ -27,7 +28,6 @@
           <h3 class="panel-title">Add New Art</h3>
         </div>
         <div class="panel-body">
-
           <!--- Add New Image Form --->
           <form id="addNewImage" class="form-horizontal" method="post" enctype="multipart/form-data" action="index.cfm?event=addArtProcess">
 

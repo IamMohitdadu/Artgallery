@@ -42,7 +42,6 @@
         <cfset event.setArg("success", LOCAL.validate.success) />
         <cfset event.setArg("data", LOCAL.validate.data) />
         <cfset announceEvent(exitEvent, event) />
-        <!--- <cfset redirectEvent(exitEvent, "",true) /> --->
 
     </cffunction>
 
@@ -68,21 +67,8 @@
                     ARGUMENTS.event.getArg("Password")
                     ) />
 
-        <!--- <cfset ARGUMENTS.event.setArg("event", "login") /> --->
-<!--- <cfdump var="#event.getArgs()#"/><cfabort> --->
-<!--- <cfdump var="#LOCAL.registered.data#"/><cfabort> --->
-
         <cfset ARGUMENTS.event.setArg("registration_success", LOCAL.registered.success) />
         <cfset ARGUMENTS.event.setArg("registration_data", LOCAL.registered.data) />
-        <!--- <cfset announceEvent("fail", ARGUMENTS.event.getArgs()) /> --->
-        <!--- <cfset redirectEvent("login", ARGUMENTS.event.getArgs()) /> --->
-
-        <!--- Check for validate user --->
-<!---         <cfif Local.registered EQ "true" >
-            <cfset event.setArg("register_error", "Registration successful. Please login.") />
-        <cfelse>
-            <cfset event.setArg("register_error", "Please enter the valid data/User already exists.") />
-        </cfif> --->
 
         <cfreturn true>
     </cffunction>
@@ -121,7 +107,6 @@
         hint="Validates a login attempt and announces a success or failure event">
         <cfargument name = "event" type="MachII.framework.Event" required="true" />
         <cfset LOCAL.artError = "" />
-    <!--- <cfdump var="#ARGUMENTS.event.getArgs()#"><cfabort> --->
 
         <!--- call artgallery service to add new art --->
         <cfif ARGUMENTS.event.getArg("UserId") NEQ ''>
@@ -134,21 +119,7 @@
 
             <cfset event.setArg("success", LOCAL.addArt.success) />
             <cfset event.setArg("data", LOCAL.addArt.data) />
-
-<!---             <cfif LOCAL.addArt EQ true>
-                <cfset LOCAL.artError = "Image Uploaded Successfully." />
-                <cfset ARGUMENTS.event.setArg('artError', LOCAL.artError) />
-            <cfelse>
-                <cfset LOCAL.artError = "Sorry, Image cannot be uploaded now. Please try again later." />
-                <cfset ARGUMENTS.event.setArg('artError', LOCAL.artError) />
-            </cfif> --->
-<!---         <cfelse>
-            <cfset LOCAL.artError = "Sorry, Image cannot be uploaded now. Please try again later." />
-            <cfset ARGUMENTS.event.setArg('artError', LOCAL.artError) /> --->
         </cfif>
-
-        <!--- <cfset announceEvent("imageAdded",ARGUMENTS.event.getArgs()) /> --->
-        <!--- <cfreturn true> --->
 
     </cffunction>
 

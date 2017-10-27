@@ -123,7 +123,6 @@
             </cfif>
 
             <cfreturn LOCAL.finalData />
-            <!--- <cfreturn false /> --->
 
             <!--- exception handler --->
             <cfcatch type="any">
@@ -151,9 +150,6 @@
         <cfset qList = queryNew("")/>
 
         <cftry>
-
-            <!--- <cfquery name="qList" datasource="#VARIABLES.dsn#" cachedwithin="#createTimespan(1, 0, 0, 0)#" timeout="30"> --->
-            <!--- Get list of artists --->
             <cfquery name="qList" datasource="#VARIABLES.dsn#" >
                 SELECT
                     USERID,
@@ -169,9 +165,11 @@
 
             <!--- exception handler --->
             <cfcatch type="any">
-                <cfthrow/>
-               <!--- <cflog file="exception" text = "#cfcatch.type# - #cfcatch.message#" type = "error" > --->
-                <!--- <cfdump var="#cfcatch.message#"/><cfabort> --->
+               <cflog file="exception" text = "#cfcatch.type# - #cfcatch.message#" type = "error" >
+<!---                 <cfset LOCAL.finalData.data = arrayNew(1)/>
+                <cfset LOCAL.finalData.success = false/>
+                <cfset LOCAL.finalData.data[1] ="Registration fail. Please try again."/>
+                <cfreturn LOCAL.finalData /> --->
             </cfcatch>
         </cftry>
 
@@ -201,9 +199,11 @@
 
             <!--- exception handler --->
             <cfcatch type="any">
-                <cfthrow/>
-               <!--- <cflog file="exception" text = "#cfcatch.type# - #cfcatch.message#" type = "error" > --->
-                <!--- <cfdump var="#cfcatch.message#"/><cfabort> --->
+               <cflog file="exception" text = "#cfcatch.type# - #cfcatch.message#" type = "error" >
+<!---                 <cfset LOCAL.finalData.data = arrayNew(1)/>
+                <cfset LOCAL.finalData.success = false/>
+                <cfset LOCAL.finalData.data[1] ="Registration fail. Please try again."/>
+                <cfreturn LOCAL.finalData /> --->
             </cfcatch>
         </cftry>
 

@@ -5,9 +5,6 @@
 * Date: 09/04/2017
 --->
 
-<!--- <cfdump var="#event.getArgs()#"/> --->
-<!--- <cfdump var="#event.getArg('registration_success')#"/><cfabort> --->
-
 <cfif structKeyExists(SESSION, 'user')>
   <cflocation url="index.cfm?event=home" addtoken="false"/>
 </cfif>

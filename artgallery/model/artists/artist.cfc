@@ -65,7 +65,6 @@
             <cfset thisError.type = "invalidType" />
             <cfset thisError.message = "EMAIL is not a string" />
             <cfset arrayAppend(errors,thisError.message) />
-            <!--- <cfset arrayAppend(errors,duplicate(thisError)) /> --->
         </cfif>
         <cfif (len(trim(getEMAIL())) GT 50)>
             <cfset thisError.field = "EMAIL" />
@@ -117,7 +116,6 @@
             <cfset thisError.type = "tooLong" />
             <cfset thisError.message = "NAME is too long" />
             <cfset arrayAppend(errors,thisError.message ) />
-            <!--- <cfset arrayAppend(errors,duplicate(thisError)) /> --->
         </cfif>
 
         <!--- ADDRESS --->
@@ -126,7 +124,6 @@
             <cfset thisError.type = "tooShort" />
             <cfset thisError.message = "ADDRESS is too short" />
             <cfset arrayAppend(errors,thisError.message ) />
-            <!--- <cfset arrayAppend(errors,duplicate(thisError)) /> --->
         </cfif>
         <cfif (len(trim(getADDRESS())) GT 50)>
             <cfset thisError.field = "ADDRESS" />
@@ -142,14 +139,12 @@
             <cfset thisError.type = "invalidType" />
             <cfset thisError.message = "EMAIL is not a string" />
             <cfset arrayAppend(errors,thisError.message ) />
-            <!--- <cfset arrayAppend(errors,duplicate(thisError)) /> --->
         </cfif>
         <cfif (len(trim(getEMAIL())) GT 50)>
             <cfset thisError.field = "EMAIL" />
             <cfset thisError.type = "tooLong" />
             <cfset thisError.message = "EMAIL is too long" />
             <cfset arrayAppend(errors,thisError.message ) />
-            <!--- <cfset arrayAppend(errors,duplicate(thisError)) /> --->
         </cfif>
 
         <!--- CONTACT --->
@@ -158,7 +153,6 @@
             <cfset thisError.type = "invalid length" />
             <cfset thisError.message = "CONTACT must be of 10 digits." />
             <cfset arrayAppend(errors,thisError.message ) />
-            <!--- <cfset arrayAppend(errors,duplicate(thisError)) /> --->
         </cfif>
 
         <!--- PASSWORD --->
@@ -167,14 +161,12 @@
             <cfset thisError.type = "invalidType" />
             <cfset thisError.message = "PASSWORD is not a string" />
             <cfset arrayAppend(errors,thisError.message ) />
-            <!--- <cfset arrayAppend(errors,duplicate(thisError)) /> --->
         </cfif>
         <cfif (len(trim(getPASSWORD())) LT 8)>
             <cfset thisError.field = "PASSWORD" />
             <cfset thisError.type = "tooShort" />
             <cfset thisError.message = "PASSWORD is too short" />
             <cfset arrayAppend(errors,thisError.message ) />
-            <!--- <cfset arrayAppend(errors,duplicate(thisError)) /> --->
         </cfif>
 
         <cfreturn errors />

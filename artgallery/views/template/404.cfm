@@ -9,5 +9,4 @@
     The page #Replace(CGI.script_name, "/", "")# is not available.<br>
     Make sure that you entered the page correctly.<br>
     <a href="index.cfm?event=home">click here</a> to go back.
-
 </cfoutput>

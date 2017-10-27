@@ -10,7 +10,6 @@
     <cfproperty name="USERID" type="numeric" default=0 />
     <cfproperty name="IMAGENAME" type="string" default="" />
     <cfproperty name="IMAGEDESCRIPTION" type="string" default="" />
-    <!--- <cfproperty name="IMAGEADDRESS" type="string" default="" /> --->
     <cfset variables.instance = StructNew() />
 
     <!---
@@ -20,13 +19,11 @@
         <cfargument name="USERID" type="numeric" required="false" default=0 />
         <cfargument name="IMAGENAME" type="string" required="false" default="" />
         <cfargument name="IMAGEDESCRIPTION" type="string" required="false" default="" />
-        <!--- <cfargument name="IMAGEADDRESS" type="string" required="false" default="" /> --->
 
         <!--- run setters --->
         <cfset setUSERID(arguments.USERID) />
         <cfset setIMAGENAME(arguments.IMAGENAME) />
         <cfset setIMAGEDESCRIPTION(arguments.IMAGEDESCRIPTION) />
-        <!--- <cfset setIMAGEADDRESS(arguments.IMAGEADDRESS) /> --->
 
         <cfreturn this />
     </cffunction>
@@ -55,14 +52,6 @@
         <cfreturn variables.instance.IMAGEDESCRIPTION />
     </cffunction>
 
-<!---     <cffunction name="setIMAGEADDRESS" access="public" returntype="void" output="false">
-        <cfargument name="IMAGEADDRESS" type="string" required="true" />
-        <cfset variables.instance.IMAGEADDRESS = arguments.IMAGEADDRESS />
-    </cffunction>
-    <cffunction name="getIMAGEADDRESS" access="public" returntype="string" output="false">
-        <cfreturn variables.instance.IMAGEADDRESS />
-    </cffunction>
- --->
     <!---
         validate Art details
     --->
@@ -130,6 +119,7 @@
 
         <cfif DirectoryExists(LOCAL.uploadFolder) >
             <cfif structKeyExists(ARGUMENTS, 'Image')>
+                <!--- check for image file and format --->
                 <cftry>
                     <cffile
                         action="upload"

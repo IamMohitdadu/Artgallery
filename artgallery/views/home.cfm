@@ -29,18 +29,17 @@
 
             <cfif fileExists(expandPath(VARIABLES.list.ImageAddress)) EQ "NO" >
                <a href="index.cfm?event=gallery&UserID=#variables.list.UserId#">
-               <img class="img-fluid d-block mx-auto" src="http://placehold.it/200x200" alt="">
+               <img class="img-fluid d-block mx-auto" src="http://placehold.it/200x200" alt=""></a>
             <cfelse>
             <!--- <cfif VARIABLES.list.ImageAddress NEQ ''> --->
               <a href="index.cfm?event=gallery&UserID=#variables.list.UserId#" addtoken='no'>
-              <img class="img-rounded d-block mx-auto" src="#list.ImageAddress#" alt="" width="200" height="200">
+              <img class="img-rounded d-block mx-auto" src="#list.ImageAddress#" alt="" width="200" height="200"></a>
             </cfif>
 
             <h3>#list.Name#
               <small>.</small>
             </h3>
             <p>#list.Email#</p>
-            </a>
           </div>
 
         </cfoutput>
@@ -52,19 +51,3 @@
     <script src="./assets/vendor/jquery/jquery.min.js"></script>
     <script src="./assets/vendor/popper/popper.min.js"></script>
     <script src="./assets/vendor/bootstrap/js/bootstrap.min.js"></script>
-<!---
-<script type="text/javascript">
-  $("p").on({
-    mouseenter: function(){
-        $(this).css("background-color", "lightgray");
-    },
-    mouseleave: function(){
-        $(this).css("background-color", "lightblue");
-    },
-    click: function(){
-        $(this).css("background-color", "yellow");
-        $("img").
-
-    }
-});
-</script> --->

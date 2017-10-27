@@ -19,13 +19,7 @@
 <!--- Include the mach-ii.cfm file included with the core code. --->
 <cfinclude template="/MachII/mach-ii.cfm" />
 
-<!---
-<meta http-equiv="cache-control" content="max-age=0" />
-<meta http-equiv="cache-control" content="no-cache" />
-<meta http-equiv="expires" content="0" />
-<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
-<meta http-equiv="pragma" content="no-cache" /> --->
-
+<!--- Empty cache data. --->
 <cfheader name="Expires" value="#Now()#">
 <cfheader name="Pragma" value="no-cache">
 <cfheader name="cache-control" value="no-cache">

@@ -5,6 +5,7 @@
 * Date: 09/26/2017
 --->
 
+<!--- check event arguments exists --->
 <cfif event.isArgDefined('qArtList')>
   <cfset VARIABLES.artList = event.getArg("qArtList") />
 
@@ -19,15 +20,14 @@
   </cfif>
 
   <div class="container">
-    <!--- <h3 class="text-center">Profile <hr></h3> --->
     <div class="row">
 
       <cfoutput query="VARIABLES.artList.artist">
+
         <div class="col-sm-6 col-md-3">
 
           <cfif fileExists(expandPath(VARIABLES.artList.artist.ImageAddress)) EQ "NO" >
             <img class="img-thumbnail" src="http://placehold.it/200x200" alt="">
-          <!--- <cfelseif VARIABLES.artList.artist.ImageAddress NEQ ''> --->
           <cfelse>
             <img src="#VARIABLES.artList.artist.ImageAddress#" alt="#VARIABLES.artList.artist.Name#" class="" width="200" height="200">
           </cfif>
@@ -54,7 +54,6 @@
 
           <cfif structKeyExists(SESSION, 'user') and SESSION.user['userId'] EQ event.getArg('userid')  >
               <input class="btn btn-primary btn-sm" type="button" id="EditProfile" name="EditProfile" value="EditProfile">
-              <!--- <a class="btn btn-primary btn-sm"  href="index.cfm?event=EditProfile"><span class="glyphicon glyphicon-pencil"></span>Edit profile</a> --->
           </cfif>
 
         </div>
@@ -76,11 +75,8 @@
       </cfoutput>
 
     </div>
-  </div>
+  </div><hr>
   <div class="container gallery-container">
-    <hr>
-
-    <!--- <h1>Gallery</h1> --->
     <p class="page-description text-center">Art is Everything and Everything is Art.</p>
     <div class="tz-gallery">
       <div class="row">
@@ -88,15 +84,7 @@
         <cfoutput query="VARIABLES.artList.art" >
 
           <div class="col-sm-6 col-md-4">
-<!---
-            <cfif structKeyExists(SESSION, 'user') and SESSION.user['userId'] EQ event.getArg('userid')  >
-                <span class="">
-                  <input type="checkbox" class="art_checkbox" name="public" id="#VARIABLES.artList.art.ImageId#" value="#VARIABLES.artList.art.ImageStatus#" <cfif VARIABLES.artList.art.ImageStatus EQ 1 > checked="checked" </cfif> />
-                </span>
-            </cfif>
- --->
             <div class="thumbnail">
-
               <a class="lightbox" href="#VARIABLES.artList.art.ImageFile#">
                 <img src="#VARIABLES.artList.art.ImageFile#" alt="#VARIABLES.artList.art.ImageName#" class="img-rounded" width="350" height="250">
               </a>
@@ -121,53 +109,9 @@
   <script src="./assets/js/validation.js"></script>
   <script src="./assets/js/updateStatus.js"></script>
   <script src="./assets/js/hideShow.js"></script>
-
   <script> baguetteBox.run('.tz-gallery'); </script>
-
- <!---  <script>
-  $(document).ready(function(){
-
-      // remove edit form and cancle the update profile.
-      $("#Cancel").click(function(){
-          $("div .EditProfileDetails").hide();
-          $("#EditProfile").show();
-          $("#ChangeImage").show();
-      });  //end
-
-      // Show edit profile form and Hide buttons while click edit button
-      $("#EditProfile").click(function(){
-          $("div .EditProfileDetails").show();
-          $("#EditProfile").hide();
-          $("#ChangeImage").hide();
-      });  //end
-
-      // update active status for arts.
-      $('.art_checkbox').on('change',function() {
-        // alert($('input:checkbox').val());
-          $.ajax({
-              type: "POST",
-              datatype: 'json',
-              // url: 'index.cfm?event=updateArtStatus&artId='+$(this).attr('id'),
-              url: './model/artgalleryService.cfc?method=updateArtStatus',
-              data: {'artId': $(this).attr('id'),
-                     'status': $('input:checkbox').val() },
-              success: function(data) {
-                  alert(data);
-              },
-               error: function() {
-                  alert('cannot update now try again later.');
-              }
-          });  //end ajax
-          return false;
-
-      }); //end
-
-  });
-  </script> --->
 
 <cfelse>
   <h3><center>User does Not Exists.</center></h3>
   <cfexit>
 </cfif>
-
-

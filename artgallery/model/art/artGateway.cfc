@@ -13,6 +13,7 @@
     <cffunction name="init" access="public" output="false" returntype="model.art.artGateway">
         <cfargument name="artgalleryDSN" type="string" required="true" />
         <cfset variables.dsn = arguments.artgalleryDSN />
+
         <cfreturn this />
     </cffunction>
 
@@ -32,10 +33,6 @@
                         ImageDescription
                 FROM    [dbo].[Gallery]
                 WHERE   UserId = <cfqueryparam cfsqltype="cf_sql_integer" value="#ARGUMENTS.UserId#">
-    <!---                    <CFIF isDefined( SESSION.USER['USERID']) AND #ARGUMENTS.UserId# NEQ #SESSION.USER['USERID']# >
-                            AND Status = 1
-                        </CFIF>
-                        --->
             </cfquery>
 
             <!--- exception handler --->
@@ -73,6 +70,7 @@
                 <cfset LOCAL.finalData.success = false/>
                 <cfset LOCAL.finalData.data[1] ="Registration fail. Please try again."/>
                 <cfreturn LOCAL.finalData /> --->
+                <cfreturn false />
             </cfcatch>
         </cftry>
 
