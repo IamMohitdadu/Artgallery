@@ -203,7 +203,7 @@ body{
 }
 .disabled{
 	height:40px;
-	width:28px;
+	/*width:28px;*/
 	display:block;
 	background:url(../images/check-icon.png) no-repeat 0% 100%;
 }

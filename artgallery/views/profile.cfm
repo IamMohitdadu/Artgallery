@@ -5,12 +5,12 @@
 * Date: 11/02/2017
 --->
 
-<link rel="stylesheet" type="text/css" href="./assets/css/profile.css">
-<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
 <!--CSS file (default YUI Sam Skin) -->
 <link type="text/css" rel="stylesheet" href="http://yui.yahooapis.com/2.9.0/build/datatable/assets/skins/sam/datatable.css">
-<!--- <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.9.0/build/reset-fonts-grids/reset-fonts-grids.css"> --->
-<!--- <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.9.0/build/base/base-min.css"> --->
+<!--- jquery datatable css --->
+<link rel="stylesheet" type="text/css" href="./assets/vendor/DataTables/datatables.min.css"/>
+<!--- custom css --->
+<link rel="stylesheet" type="text/css" href="./assets/css/profile.css">
 
 <!--- check event arguments exists --->
 <cfif event.isArgDefined('qArtList')>
@@ -56,7 +56,7 @@
   <!--- right side bar --->
   <div class="right-side col-sm-12 col-lg-9">
     <!--- edit form --->
-    <div class="col-sm-12 col-md-11 col-lg-11 col-lg-offset-1 profile_details">
+    <div class="col-sm-12 col-md-11 col-lg-11 col-lg-offset-1 profile_details pull-right">
       <!--- change profile image form --->
       <h4>Change Profile Image:</h4>
       <div class="container-fluid">
@@ -110,7 +110,7 @@
                 <textarea name="comment" id="comment" style="width:100%;height:90px;border:none; padding:1%;font:15px sans-serif;">#VARIABLES.artList.artist.Comment#</textarea>
               </div>
               <div class="pull-right">
-                <input class="btn btn-danger btn-sm" type="button" id="Cancel" name="Cancel" value="Cancel">
+                <!--- <input class="btn btn-danger btn-sm" type="button" id="Cancel" name="Cancel" value="Cancel"> --->
                 <input class="btn btn-primary btn-sm" type="Submit" name="Submit" value="Submit">
               </div>
             </form>
@@ -122,13 +122,14 @@
     </div>
     <!--- End edit form --->
     <!--- Art details --->
-    <div class="col-sm-12 col-md-11 col-lg-11 col-lg-offset-1 art_details table-responsive" id="datatable" style="display: none;">
+    <div class="col-sm-12 col-md-11 col-lg-11 col-lg-offset-1 art_details table-responsive pull-right" id="datatable" style="display: none;">
       <table id="artlist" class="table table-striped table-bordered" cellspacing="0" width="100%">
         <thead>
           <tr>
             <th>S.No.</th>
             <th>Name</th>
             <th>Description</th>
+            <th>Added On</th>
             <th>Public</th>
           </tr>
         </thead>
@@ -141,6 +142,7 @@
               <td>#counter#</td>
               <td><a class="hover_img" href="#VARIABLES.artList.art.ImageFile#">#VARIABLES.artList.art.ImageName#</a></td>
               <td>#VARIABLES.artList.art.ImageDescription#</td>
+              <td>#VARIABLES.artList.art.CreatedOn#</td>
               <td class="text-center">
                 <input type="checkbox" name="Status" value="1" id="#VARIABLES.artList.art.ImageId#" <cfif VARIABLES.artList.art.ImageStatus EQ 1 > checked="checked" </cfif> onclick="changeStatus('#VARIABLES.artList.art.ImageId#')" >
               </td>
@@ -154,7 +156,7 @@
     </div>
     <!--- End art details --->
     <!--- art details YUI Data table --->
-    <div class="col-sm-12 col-md-11 col-lg-11 col-lg-offset-1 artyui_details table-responsive" id="datatable" style="display: none;">
+    <div class="col-sm-12 col-md-11 col-lg-11 col-lg-offset-1 artyui_details table-responsive pull-right" id="datatable" style="display: none;">
 
       <cfset jsonobj = []/>
       <cfoutput query="VARIABLES.artList.art" >
@@ -169,7 +171,7 @@
       </cfoutput>
       <cfset jsondata = serializejson(jsonobj) />
 
-      <div id="myContainer" class="container myContainer yui-skin-sam"></div>
+      <div id="myContainer" class="myContainer yui-skin-sam"></div>
     </div>
     <!--- End YUI Datatable --->
   </div>
@@ -178,20 +180,23 @@
 </div>
 
 <!--- include files --->
-<script src="./assets/vendor/jquery/jquery.min.js"></script>
+<!--- <script src="./assets/vendor/jquery/jquery.min.js"></script> --->
 <script src="./assets/vendor/popper/popper.min.js"></script>
 <script src="./assets/vendor/bootstrap/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>
-<script src="http://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
+<!--- <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script> --->
 <script type="text/javascript" src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<!--- jquery datatable plugins --->
+<script type="text/javascript" src="./assets/vendor/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="./assets/vendor/DataTables/datatables.min.js"></script>
+<!--- custom Js --->
 <script src="./assets/js/validation.js"></script>
 <script src="./assets/js/updateStatus.js"></script>
 <script src="./assets/js/hideShow.js"></script>
 <script src="./assets/js/form.js"></script>
 <script>
   $(document).ready(function(){
+    $.noConflict();
     $('#artlist').DataTable();
   });
 </script>

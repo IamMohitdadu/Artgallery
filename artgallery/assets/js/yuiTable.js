@@ -7,7 +7,7 @@
 
 var myDataSource = new YAHOO.util.DataSource(jsdata);
 var myConfigs = {
-    paginator : new YAHOO.widget.Paginator({ rowsPerPage: 20 }),
+    paginator : new YAHOO.widget.Paginator({ rowsPerPage: 15 }),
     sortedBy : { key: "Id", dir: YAHOO.widget.DataTable.CLASS_ASC },
 };
 
