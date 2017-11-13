@@ -15,7 +15,6 @@
         <property name="parameterPrecedence" value="form" />
         <property name="maxEvents" value="10" />
         <property name="exceptionEvent" value="exceptionEvent" />
-        <property name="sessionProperty" type="artgallery.properties.SessionProperty" />
     </properties>
 
     <!-- LISTENERS -->
@@ -32,9 +31,6 @@
             </parameters>
         </event-filter>
         -->
-
-        <event-filter name="validateUser" type="filter.validateUser" />
-
     </event-filters>
 
     <!-- PLUGINS -->
@@ -52,27 +48,25 @@
     <event-handlers>
         <!-- For Home Page -->
         <event-handler event="home" access="public">
-            <even-arg name="pageTitle" value="Home" />
+            <event-arg name="pageTitle" value="Home" />
             <view-page name="header" />
             <view-page name="nav" />
             <view-page name="home" />
-            <!-- <view-page name="bootstrapModel" /> -->
             <view-page name="footer" />
         </event-handler>
 
         <!-- For login/signup Page -->
         <event-handler event="login" access="public">
-            <even-arg name="pageTitle" value="login" />
+            <event-arg name="pageTitle" value="login" />
             <view-page name="header" />
             <view-page name="nav" />
             <view-page name="login" />
-            <!-- <view-page name="bootstrapModel" /> -->
             <view-page name="footer" />
         </event-handler>
 
         <!-- For Add image Page -->
         <event-handler event="addArt" access="public">
-            <even-arg name="pageTitle" value="Add Art" />
+            <event-arg name="pageTitle" value="Add Art" />
             <view-page name="header" />
             <view-page name="nav" />
             <view-page name="addArt" />
@@ -81,52 +75,35 @@
 
         <!-- For Gallery Page -->
         <event-handler event="gallery" access="public">
-            <notify listener="artgalleryListener" method="GetArt" resultArg="qArtList" />
-            <even-arg name="pageTitle" value="gallery" />
+            <notify listener="artgalleryListener" method="GetArts" resultArg="qArtList" />
+            <event-arg name="pageTitle" value="gallery" />
             <view-page name="header" />
             <view-page name="nav" />
             <view-page name="gallery" />
-            <!-- <view-page name="bootstrapModel" /> -->
             <view-page name="footer" />
-
         </event-handler>
 
-        <!-- For successful login -->
-     <!--    <event-handler event="pass" access="private">
-            <announce event="gallery" copyEventArgs="true" />
+        <event-handler event="loginFailed" access="public">
+            <announce event="login" copyEventArgs="true"/>
+            <!-- <redirect event="login" persist='true' persistArgs = ""/> -->
         </event-handler>
- -->
-        <!-- for failed login -->
-<!--         <event-handler event="fail" access="private">
-            <redirect event="login" copyEventArgs="true" />
-        </event-handler> -->
 
         <!-- For Login -->
         <event-handler event="loginProcess" access="public">
-<!--             <filter name="validateUser">
-                <parameter name="Validate" value="login" />
-            </filter> -->
-            <event-mapping event="pass" mapping="gallery" />
-            <event-mapping event="fail" mapping="login" />
+            <event-mapping event="fail" mapping="loginFailed" />
             <notify listener="artgalleryListener" method="Login"/>
         </event-handler>
 
         <!-- For Registration -->
         <event-handler event="RegistrationProcess" access="public">
-<!--             <filter name="validateUser">
-                <parameter name="Validate" value="registration" />
-            </filter> -->
-
-            <!-- <event-mapping event="login" mapping="login" /> -->
             <notify listener="artgalleryListener" method="Registration" />
             <announce event="login" copyEventArgs="true" />
-            <!-- <redirect event="login" persist="true" /> -->
         </event-handler>
 
         <!-- For adding art -->
         <event-handler event="addArtProcess" access="public">
             <notify listener="artgalleryListener" method="AddArt"/>
-            <announce event="addArt" copyEventArgs="true" />
+            <redirect event="addArt" persistArgs="" />
         </event-handler>
 
         <!-- Update art active status -->
@@ -143,33 +120,34 @@
         <!-- for upload/change profile image -->
         <event-handler event="uploadProfileImage" access="public">
             <notify listener="artgalleryListener" method="ChangeProfileImage"/>
-            <announce event="gallery" copyEventArgs = "true" />
+            <redirect event="profile" persistArgs = "" />
+        </event-handler>
+
+        <!-- Public/Private art status -->
+        <event-handler event="updateImageStatus" access="public">
+            <notify listener="artgalleryListener" method="UpdateImageStatus"/>
+            <redirect event="profile" persistArgs = "" />
         </event-handler>
 
         <!-- for edit profile details -->
         <event-handler event="EditProfile" access="public">
             <notify listener="artgalleryListener" method="EditProfile"/>
-            <announce event="gallery" copyEventArgs = "true" />
+            <redirect event="profile" persistArgs="" />
         </event-handler>
 
-        <!-- sample event handler that uses caching and the default cache (data cached for 1 hour in application scope) -->
-        <!--
-        <event-handler event="useCache" access="public">
-            <cache>
-                <notify listener="SomeListener" method="getDataForCache" resultArg="cachedData" />
-            </cache>
+        <!-- Profile page -->
+        <event-handler event="profile" access="public">
+            <notify listener="artgalleryListener" method="MyProfile" resultArg="qArtList"/>
+            <event-arg name="pageTitle" value="My Profile" />
+            <view-page name="header" />
+            <view-page name="nav" />
+            <view-page name="profile" />
+            <view-page name="footer" />
         </event-handler>
-        -->
 
-        <!-- sample event handler that uses message/subscriber listener notification -->
-        <!--
-        <event-handler event="messagePublisher" access="public">
-            <publish message="needStuff" />
-        </event-handler>
-        -->
-
+        <!-- Exception handler event -->
         <event-handler event="exceptionEvent" access="private">
-            <even-arg name="pageTitle" value="Exception" />
+            <event-arg name="pageTitle" value="Exception" />
             <view-page name="header" />
             <view-page name="nav" />
             <view-page name="exception" />
@@ -199,13 +177,12 @@
         <page-view name="login" page="/views/login.cfm" />
         <page-view name="addArt" page="/views/addArt.cfm" />
         <page-view name="gallery" page="/views/gallery.cfm" />
-        <!-- <page-view name="exception" page="/views/template/404.cfm" /> -->
+        <page-view name="profile" page="/views/profile.cfm" />
         <page-view name="exception" page="/views/exception.cfm" />
         <page-view name="header" page="/views/layouts/header.cfm" />
         <page-view name="bootstrapModel" page="/views/layouts/bootstrapModel.cfm" />
         <page-view name="nav" page="/views/layouts/nav.cfm" />
         <page-view name="footer" page="/views/layouts/footer.cfm" />
-
     </page-views>
 
 </mach-ii>

@@ -11,7 +11,6 @@
     <cffunction name="init" access="public" output="false" returntype="model.artgalleryService">
         <cfset VARIABLES.artDAO = 0 />
         <cfset VARIABLES.artGateway = 0 />
-        <cfset VARIABLES.artistDAO = 0 />
         <cfset VARIABLES.artistGateway = 0 />
         <cfset VARIABLES.artist = 0 />
         <cfset VARIABLES.art = 0 />
@@ -22,11 +21,6 @@
     <cffunction name="setartDAO" returntype="void" output="false" hint="injected service">
         <cfargument name="artDAO" type="any" required="yes" />
         <cfset VARIABLES.artDAO = arguments.artDAO />
-    </cffunction>
-
-    <cffunction name="setartistDAO" returntype="void" output="false" hint="injected service">
-        <cfargument name="artistDAO" type="any" required="yes" />
-        <cfset VARIABLES.artistDAO = arguments.artistDAO />
     </cffunction>
 
     <cffunction name="setartGateway" returntype="void" output="false" hint="injected service">
@@ -131,6 +125,21 @@
     </cffunction>
 
     <!---
+        To get Profile details
+    --->
+    <cffunction name="ProfileDetails" access="public" output="false" returntype="struct">
+        <cfargument name="USERID" type="string" required="false" />
+        <cfset LOCAL.artgallery = structNew() />
+
+        <!--- get artist details from database --->
+        <cfset LOCAL.artgallery.artist = VARIABLES.artistGateway.GetArtistDetails(argumentCollection=arguments) />
+        <!--- get art details from database of an artist--->
+        <cfset LOCAL.artgallery.art = VARIABLES.artGateway.AllArtList(argumentCollection=arguments) />
+
+        <cfreturn artgallery />
+    </cffunction>
+
+    <!---
         To add art into database
     --->
     <cffunction name="AddArtDetails" access="public" output="false" returntype="any">
@@ -211,6 +220,7 @@
         <cfargument name="NAME" type="string" required="false" />
         <cfargument name="ADDRESS" type="string" required="false" />
         <cfargument name="CONTACT" type="numeric" required="false" />
+        <cfargument name="COMMENT" type="string" required="false" />
 
         <!---Validate profile details --->
         <cfset LOCAL.artist = VARIABLES.artist.init(argumentCollection=arguments) />
@@ -222,6 +232,7 @@
 
             <!--- check for successfully update profile --->
             <cfif LOCAL.profileUpdated EQ true>
+                <cfset SESSION.user['NAME'] = ARGUMENTS.NAME />
                 <cfreturn true />
             </cfif>
 
@@ -230,22 +241,14 @@
         <cfreturn false />
     </cffunction>
 
-        <!--- To update art status --->
+    <!--- To update art status --->
     <cffunction name="UpdateArtStatus" access="remote" output="false" returntype="any" hint="update art status">
         <cfargument name="artId" type="numeric" required="true">
-        <cfargument name="status" type="numeric" required="true">
-
-        <!--- check art active status --->
-        <cfif ARGUMENTS.status EQ 0>
-            <cfset ARGUMENTS.status = 1>
-        <cfelse>
-            <cfset ARGUMENTS.status = 0>
-        </cfif>
 
         <cfif ARGUMENTS.artId NEQ 0 >
             <!--- update art active status --->
             <cfset LOCAL.updated = VARIABLES.artGateway.UpdateArtStatus(argumentCollection=arguments) />
-            <cfreturn true>
+            <cfreturn LOCAL.updated>
         </cfif>
 
         <cfreturn false>

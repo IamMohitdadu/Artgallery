@@ -6,12 +6,12 @@
 --->
 
     <!-- Footer -->
-    <footer class=" bg-dark fixed-bottom">
+<!---     <footer class=" bg-dark fixed-bottom">
       <div class="container">
         <p class="m-0 text-center text-white">Copyright &copy; Mindfire Solutions</p>
       </div>
     </footer>
-
+ --->
     <script src="./assets/vendor/jquery/jquery.min.js"></script>
     <script src="./assets/vendor/popper/popper.min.js"></script>
     <!-- Bootstrap core JavaScript -->

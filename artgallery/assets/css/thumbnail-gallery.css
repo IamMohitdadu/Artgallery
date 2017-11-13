@@ -1,6 +1,13 @@
+/*
+* File: thumbnail-gallery.cfm
+* Author: Mohit Dadu
+* Date: 10/02/2017
+*/
+
 body {
     /*background-image: linear-gradient(to top, #e6e9f0 0%, #eef1f5 100%);*/
-    background-image: url(../images/gallery/light_wallpaper.jpg);
+    /*background-image: url(../images/gallery/light_wallpaper.jpg);*/
+    background-color: cyan;
     background-repeat: no-repeat;
     background-size: cover;
 
@@ -46,7 +53,7 @@ body {
 }
 
 .tz-gallery .caption{
-    padding: 26px 30px;
+    /*padding: 26px 30px;*/
     text-align: center;
 }
 
@@ -62,10 +69,13 @@ body {
     margin: 0;
 }
 
+/*for popup of arts at gallery page*/
 .baguetteBox-button {
     background-color: transparent !important;
 }
+/*end*/
 
+/* for art at gallery page*/
 .thumbnail img {
     max-height: 100%;
     max-width: 100%;
@@ -75,4 +85,50 @@ body {
     border: 15px solid;
     border-color: black;
     box-sizing: border-box;
+}
+
+img.img-rounded {
+    max-height: 250px;
+}
+
+.frame {
+  border-image: url('//s3-us-west-2.amazonaws.com/s.cdpn.io/4273/frame.png') 93 92 87 92 stretch stretch;
+  border-color: #f4be52;
+  border-style: inset;
+  border-width: 40px;
+  display: block;
+  width: 100%;
+  /*height: auto;*/
+  background-color: #ffe;
+  /*margin: 5px auto;*/
+}
+
+@media all and (max-width: 500px) {
+  .frame {
+    border-width: 0px;
+    width: 100%; }
+}
+
+div.imgframe {
+    padding: 20px 20px 20px 20px;
+}
+/*end*/
+
+/* painting detail blocks*/
+div#list_display {
+    margin-bottom: 40px;
+    margin-top: 30px;
+}
+
+div#grid_display {
+    margin-bottom: 40px;
+    margin-top: 0px;
+}
+
+.Inactive {
+    color: red;
+}
+
+.myContainer {
+    margin-bottom: 30px;
 }

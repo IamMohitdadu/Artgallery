@@ -67,6 +67,7 @@ $(document).ready(function(){
     * @return error messages if found.
     */
     $("#login").validate({
+        ignore: ".ignore",
         rules: {
             Email: {
                 required: true,
@@ -75,6 +76,15 @@ $(document).ready(function(){
             Password: {
                 required: true,
                 minlength: 8
+            },
+            "hiddenRecaptcha": {
+                 required: function() {
+                     if(grecaptcha.getResponse() == '') {
+                         return true;
+                     } else {
+                         return false;
+                     }
+                 }
             }
         },
         messages: {
@@ -85,9 +95,11 @@ $(document).ready(function(){
             Password: {
                 required: "Please enter Password",
                 minlength: "Password should be of minimum 8 charecters"
+            },
+            hiddenRecaptcha: {
+                required: "Please verify the captcha."
             }
         },
-
         // submitHandler: function(form) {
         //     $(form).ajax({
         //         url: 'index.cfm?event=loginProcess',

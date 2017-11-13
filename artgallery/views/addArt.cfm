@@ -63,8 +63,8 @@
                 </div>
               </div>
               <div class="modal-footer">
-                <a class="btn btn-danger" href="index.cfm?event=gallery&UserId=#SESSION.USER['USERID']#"><span class="glyphicon glyphicon-pencil"></span>Cancel</a>
-                <input type="submit" class="btn btn-primary" id="submit" name="submit" value="Add Art" />
+                <a class="btn btn-danger" href="index.cfm?event=gallery&UserId=#SESSION.USER['USERID']#">Cancel</a>
+                <input type="submit" class="btn btn-primary" id="submit" name="submit" value="Submit" />
               </div>
 
             </cfoutput>

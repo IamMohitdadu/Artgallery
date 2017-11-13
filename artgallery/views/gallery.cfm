@@ -10,87 +10,73 @@
   <cfset VARIABLES.artList = event.getArg("qArtList") />
 
   <cfif structIsEmpty(VARIABLES.artList)>
-    <h3><center>User does Not Exists.</center></h3>
+    <div id="" class="text-center" ><h3>User does Not Exists / Session Expired, Please login..</h3></div>
     <cfexit>
   </cfif>
 
-  <cfif VARIABLES.artList.artist.Name EQ ''>
-    <h3><center>User does Not Exists.</center></h3>
+  <cfif VARIABLES.artList.artist.UserId EQ ''>
+    <div id="" class="text-center" ><h3>User does Not Exists / Session Expired, Please login..</h3></div>
     <cfexit>
   </cfif>
 
+  <!--- content --->
   <div class="container">
     <div class="row">
 
       <cfoutput query="VARIABLES.artList.artist">
 
-        <div class="col-sm-6 col-md-3">
+        <div class="col-sm-12 col-md-3 text-center" style="margin-bottom: 5px;">
 
           <cfif fileExists(expandPath(VARIABLES.artList.artist.ImageAddress)) EQ "NO" >
             <img class="img-thumbnail" src="http://placehold.it/200x200" alt="">
           <cfelse>
-            <img src="#VARIABLES.artList.artist.ImageAddress#" alt="#VARIABLES.artList.artist.Name#" class="" width="200" height="200">
-          </cfif>
-
-          <cfif structKeyExists(SESSION, 'user') and SESSION.user['userId'] EQ event.getArg('userid')  >
-            <form class="" id="ChangeImage" name="ChangeImage" method="post" enctype="multipart/form-data" action="index.cfm?event=uploadProfileImage">
-              <input type="hidden" id="UserId" name="UserId" value="<cfif structKeyExists(SESSION,'user')><cfoutput>#SESSION.user['userId']#</cfoutput></cfif>" />
-              <input type="file" name="Image" id="Image" >
-              <input class="btn btn-primary btn-sm" type="Submit" name="Submit" value="Submit"><br>
-
-              <cfif event.isArgDefined('imageMessage') >
-                <span class="fa fa-circle-sm icon-resize-small" aria-hidden="true" style="color: red">#arguments.event.getArg('imageMessage')#</span>
-              </cfif>
-
-            </form>
+            <img src="#VARIABLES.artList.artist.ImageAddress#" alt="#VARIABLES.artList.artist.Name#" id="rcorners6" class="text-right" width="210" height="160">
           </cfif>
 
         </div>
-        <div class="col-sm-6 col-md-3 ">
+        <div class="col-sm-12 col-md-9 ">
           <h3>#VARIABLES.artList.artist.Name#</h3>
-          <p>Address: #VARIABLES.artList.artist.Address#</p>
-          <p>Email: #VARIABLES.artList.artist.Email#</p>
-          <p>Contact: #VARIABLES.artList.artist.Contact#</p>
 
-          <cfif structKeyExists(SESSION, 'user') and SESSION.user['userId'] EQ event.getArg('userid')  >
-              <input class="btn btn-primary btn-sm" type="button" id="EditProfile" name="EditProfile" value="EditProfile">
+          <cfif VARIABLES.artList.artist.Comment NEQ ''>
+            <p>#VARIABLES.artList.artist.Comment#</p>
+          <cfelse>
+            <p>
+              For my part I know nothing with any certainty, but the sight of the stars makes me dream.
+              I dream of painting and then I paint my dream.
+              I feel that there is nothing more truly artistic than to love people.
+              The best way to know God is to love many things.
+              I often think that the night is more alive and more richly colored than the day.
+              What would life be if we had no courage to attempt anything?
+              If you truly love Nature, you will find beauty everywhere.
+            </p>
           </cfif>
-
-        </div>
-
-        <div class="EditProfileDetails col-sm-6 col-md-6" style="display: none">
-          <form id="updateProfile" method="post" action="index.cfm?event=EditProfile">
-            <input type="hidden" id="UserId" name="UserId" value="<cfif structKeyExists(SESSION,'user')>#SESSION.user['userId']#</cfif>" />
-            <label for="Email">Name</label>
-            <input type="text" id="Name" name="Name" placeholder="Name" value="#VARIABLES.artList.artist.Name#" class="form-control" /><br>
-            <label for="Address">Address</label>
-            <input type="text" id="Address" name="Address" placeholder="Address" value="#VARIABLES.artList.artist.Address#" class="form-control" /><br>
-            <label for="Contact">Contact</label>
-            <input type="number" id="Contact" name="Contact" placeholder="Contact" value="#VARIABLES.artList.artist.Contact#" class="form-control" /><br>
-            <input class="btn btn-danger btn-sm" type="button" id="Cancel" name="Cancel" value="Cancel">
-            <input class="btn btn-primary btn-sm" type="Submit" name="Submit" value="Submit">
-          </form>
+<!---           <p>Address: #VARIABLES.artList.artist.Address#</p>
+          <p>Email: #VARIABLES.artList.artist.Email#</p>
+          <p>Contact: #VARIABLES.artList.artist.Contact#</p> --->
         </div>
 
       </cfoutput>
 
     </div>
-  </div><hr>
-  <div class="container gallery-container">
-    <p class="page-description text-center">Art is Everything and Everything is Art.</p>
-    <div class="tz-gallery">
+  </div>
+  <hr style="height: 10px; border: 0; box-shadow: 0 10px 10px -10px #8c8b8b inset";>
+
+  <!--- Tile display --->
+  <div class="container gallery-container" id="grid_display">
+    <!--- <p class="page-description text-center col-md-8">Art is Everything and Everything is Art.</p> --->
+    <div class="tz-gallery col-md-12 ">
       <div class="row">
 
         <cfoutput query="VARIABLES.artList.art" >
 
-          <div class="col-sm-6 col-md-4">
-            <div class="thumbnail">
+          <div class="col-sm-3 col-md-4 col-lg-4 imgframe">
+            <div class="frame">
               <a class="lightbox" href="#VARIABLES.artList.art.ImageFile#">
-                <img src="#VARIABLES.artList.art.ImageFile#" alt="#VARIABLES.artList.art.ImageName#" class="img-rounded" width="350" height="250">
+                <img src="#VARIABLES.artList.art.ImageFile#" alt="#VARIABLES.artList.art.ImageName#" class="container-fluid" width="350" height="250">
               </a>
               <div class="caption">
                 <h3>#VARIABLES.artList.art.ImageName#</h3>
-                <p>Description: #VARIABLES.artList.art.ImageDescription#.</p>
+                <p>#VARIABLES.artList.art.ImageDescription#.</p>
               </div>
             </div>
           </div>
@@ -100,18 +86,15 @@
       </div>
     </div>
   </div>
+  <!--- End tile display --->
 
+  <!--- include files --->
   <script src="./assets/vendor/jquery/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.js"></script>
   <script src="./assets/vendor/popper/popper.min.js"></script>
-  <script src="./assets/vendor/bootstrap/js/bootstrap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>
-  <script src="./assets/js/validation.js"></script>
-  <script src="./assets/js/updateStatus.js"></script>
-  <script src="./assets/js/hideShow.js"></script>
   <script> baguetteBox.run('.tz-gallery'); </script>
 
 <cfelse>
-  <h3><center>User does Not Exists.</center></h3>
+  <div id="" class="text-center" ><h3>User does Not Exists.</h3></div>
   <cfexit>
 </cfif>

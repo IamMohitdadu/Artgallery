@@ -14,12 +14,6 @@
         </constructor-arg>
     </bean>
 
-    <bean id="artistDAO" class="artgallery.model.artists.artistDAO">
-        <constructor-arg name="artgalleryDSN">
-            <value>artgallery</value>
-        </constructor-arg>
-    </bean>
-
     <bean id="artistGateway" class="artgallery.model.artists.artistGateway">
         <constructor-arg name="artgalleryDSN">
             <value>artgallery</value>
@@ -38,9 +32,6 @@
         </property>
         <property name="artGateway">
             <ref bean="artGateway"/>
-        </property>
-        <property name="artistDAO">
-            <ref bean="artistDAO"/>
         </property>
         <property name="artistGateway">
             <ref bean="artistGateway"/>

@@ -192,6 +192,7 @@
                     ADDRESS,
                     EMAIL,
                     CONTACT,
+                    COMMENT,
                     IMAGEADDRESS
                 FROM    [dbo].[User]
                 WHERE   USERID = <cfqueryparam cfsqltype="cf_sql_integer" value="#ARGUMENTS.USERID#">
@@ -252,8 +253,9 @@
         <cfargument name="NAME" type="string" required="true" />
         <cfargument name="ADDRESS" type="string" required="true" />
         <cfargument name="CONTACT" type="numeric" required="true" />
-
+        <cfargument name="COMMENT" type="string" required="true" />
         <cfset var qCreate = "" />
+
         <cftry>
             <!--- update user details --->
             <cfquery name="qCreate" datasource="#VARIABLES.dsn#" result="updateRecord">
@@ -262,6 +264,7 @@
                     NAME = <cfqueryparam cfsqltype="cf_sql_varchar" value="#ARGUMENTS.NAME#">,
                     ADDRESS = <cfqueryparam cfsqltype="cf_sql_varchar" value="#ARGUMENTS.ADDRESS#">,
                     CONTACT = <cfqueryparam cfsqltype="cf_sql_bigint" value="#ARGUMENTS.CONTACT#">,
+                    COMMENT = <cfqueryparam cfsqltype="cf_sql_varchar" value="#ARGUMENTS.COMMENT#">,
                     ModifiedOn = GETDATE()
                 WHERE UserId = <cfqueryparam cfsqltype="cf_sql_integer" value="#ARGUMENTS.USERID#">
             </cfquery>
