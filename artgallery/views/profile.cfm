@@ -123,10 +123,12 @@
     <!--- End edit form --->
     <!--- Art details --->
     <div class="col-sm-12 col-md-11 col-lg-11 col-lg-offset-1 art_details table-responsive pull-right" id="datatable" style="display: none;">
+      <input type="text" name="search" class="search pull-right text-right" id="search" placeholder="Search...">
       <table id="artlist" class="table table-striped table-bordered" cellspacing="0" width="100%">
         <thead>
           <tr>
             <th>S.No.</th>
+            <th style="display: none;">Art</th>
             <th>Name</th>
             <th>Description</th>
             <th>Added On</th>
@@ -138,13 +140,14 @@
           <cfset counter = 1/>
           <cfoutput query="VARIABLES.artList.art" >
 
-            <tr>
+            <tr class="tableRow">
               <td>#counter#</td>
-              <td><a class="hover_img" href="#VARIABLES.artList.art.ImageFile#">#VARIABLES.artList.art.ImageName#</a></td>
+              <td style="display: none; background-color: lightgray;"><img src="#VARIABLES.artList.art.ImageFile#" height="300" width="300"></td>
+              <td>#VARIABLES.artList.art.ImageName#</td>
               <td>#VARIABLES.artList.art.ImageDescription#</td>
               <td>#VARIABLES.artList.art.CreatedOn#</td>
               <td class="text-center">
-                <input type="checkbox" name="Status" value="1" id="#VARIABLES.artList.art.ImageId#" <cfif VARIABLES.artList.art.ImageStatus EQ 1 > checked="checked" </cfif> onclick="changeStatus('#VARIABLES.artList.art.ImageId#')" >
+                <input type="checkbox" class="checkbox" name="Status" value="1" id="#VARIABLES.artList.art.ImageId#" <cfif VARIABLES.artList.art.ImageStatus EQ 1 > checked="checked" </cfif> onclick="changeStatus('#VARIABLES.artList.art.ImageId#')" >
               </td>
             </tr>
 
@@ -182,12 +185,12 @@
 <!--- include files --->
 <!--- <script src="./assets/vendor/jquery/jquery.min.js"></script> --->
 <script src="./assets/vendor/popper/popper.min.js"></script>
+<script src="./assets/vendor/jquery/jquery.min.js"></script>
 <script src="./assets/vendor/bootstrap/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>
 <!--- <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script> --->
 <script type="text/javascript" src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 <!--- jquery datatable plugins --->
-<script type="text/javascript" src="./assets/vendor/jquery/jquery.min.js"></script>
 <script type="text/javascript" src="./assets/vendor/DataTables/datatables.min.js"></script>
 <!--- custom Js --->
 <script src="./assets/js/validation.js"></script>
@@ -197,9 +200,40 @@
 <script>
   $(document).ready(function(){
     $.noConflict();
-    $('#artlist').DataTable();
-  });
-</script>
+    var dtable = $('#artlist').DataTable({
+      "dom": 't',
+      "dom": 'p',
+      });
+    $('#search').keyup(function(){
+      dtable.search($(this).val()).draw() ;
+      });
+  // });
+
+/* Formatting function for row details - modify as you need */
+function format ( d ) {
+    // `d` is the original data object for the row
+    return '<div style="text-align:center;">' +d[1]+ '</div>';
+}
+  // Add event listener for opening and closing details
+    $('#artlist tbody').on('click', 'td', function () {
+        var tr = $(this).closest('tr');
+        var row = dtable.row( tr );
+
+        if ( row.child.isShown() ) {
+            // This row is already open - close it
+            row.child.hide();
+            tr.removeClass('shown');
+            tr.css("background-color", "");
+        }
+        else {
+            // Open this row
+            row.child( format(row.data()) ).show();
+            tr.addClass('shown');
+            tr.css("background-color", "lightblue");
+        }
+    } );
+} );
+</script> <img src="">
 <!--- *************** DataTable constructor(YUI) ******************** --->
 <!-- Dependencies -->
 <script src="http://yui.yahooapis.com/2.9.0/build/yahoo-dom-event/yahoo-dom-event.js"></script>
