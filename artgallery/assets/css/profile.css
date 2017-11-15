@@ -105,13 +105,18 @@ body {
     border-bottom-left-radius: 0px;
     border-bottom-right-radius: 0px;
 	/*border: 1px solid #ddd;*/
+    border: none;
+    /*border-bottom: 1px solid #000;*/
+    font-style: italic;
 }
 
 .list-group-item {
     margin-bottom: 0px;
     padding: 15px;
-    background-color: gray;
-    color: white;
+    background-color: transparent;
+    color: #d8450b;
+    /*color: white;*/
+    /*text-decoration: underline;*/
 }
 
 .list-group-item:first-child {
@@ -125,8 +130,9 @@ body {
 }
 
 .list-group-item:hover {
-    background-color: cyan;
+    background-color: lightgray;
     color: black;
+    font-style: normal;
     cursor: pointer;
 }
 
@@ -151,9 +157,9 @@ body {
     .left-side {
         /*border-right: 1px solid #fff;*/
         /*background-color: lightblue;*/
-        padding-bottom: 10px;
+        padding-bottom: 20px;
         min-height: 400px;
-        outline: 2px solid #F00;
+        /*outline: 2px solid #F00;*/
     }
     .right-side {
         min-height: 400px;
@@ -194,6 +200,17 @@ input[type="checkbox"]{
     padding-bottom: 5px;
 }
 
+table#artlist th{
+    border: none;
+    background-color: black;
+    color: white;
+}
+
+table#artlist tr:hover {
+    background-color: lightblue;
+    cursor: pointer;
+}
+
 table.dataTable thead th, table.dataTable thead td {
     border-bottom: none;
 }
@@ -205,6 +222,17 @@ table.dataTable thead th, table.dataTable thead td {
 .table-bordered>thead>tr>td,
 .table-bordered>thead>tr>th{
     border: none;
+}
+
+table.dataTable thead .sorting,
+table.dataTable thead .sorting_asc,
+table.dataTable thead .sorting_desc,
+table.dataTable thead .sorting_asc_disabled,
+table.dataTable thead .sorting_desc_disabled {
+    background-position: center left;
+}
+div.dataTables_info{
+    display: none;
 }
 
 .search {
@@ -226,3 +254,13 @@ table.dataTable thead th, table.dataTable thead td {
 /*.search:focus {
     width: 100%;
 }*/
+
+h4 {
+    background-color: #f8f8f8;
+    padding: 10px 5px;
+    margin: 0px 0px 20px 0px;
+}
+
+hr{
+    height: 2px solid ;
+}

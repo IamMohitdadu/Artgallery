@@ -109,6 +109,16 @@
         </div>
         <div class="clear"> </div>
         <div class="g-signin2" data-onsuccess="onSignIn"></div>
+        <cflogin>
+<cfoauth
+type = "Facebook"
+clientid = "YOUR_CLIENT_ID"
+secretkey = "YOUR_SECRET_KEY"
+result = "res"
+redirecturi = "http://localhost:8500/doc/login.cfm" >
+<cfloginuser name = "#res.other.username#" password = "#res.access_token#" roles = "user"/>
+</cflogin>
+<cflocation url="http://localhost:8500/doc/index.cfm" >
 
     </div>
   </div>

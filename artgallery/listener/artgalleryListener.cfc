@@ -20,6 +20,11 @@
         <cfargument name="event" type="MachII.framework.Event" required="true" />
         <cfset response_error = arrayNew(1)/>
 
+<!---         <cfset st['a']= "hi"/>
+        <cfset st['b'] = "hello"/>
+        <cfset event.setArg('st', st['b'])/>
+        <cfset redirectEvent("login","",true, st['a'])/><cfexit>
+ --->
         <!--- check for available login session details --->
         <cfif structKeyExists(SESSION, 'user') >
             <cfset redirectEvent('gallery', event) />

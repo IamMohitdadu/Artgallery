@@ -30,26 +30,30 @@
 <div class="">
   <!--- left side --->
   <div class="left-side col-sm-12 col-lg-3 text-center">
+    <div class="profile-details">
 
-    <cfoutput query="VARIABLES.artList.artist">
-      <cfif fileExists(expandPath(VARIABLES.artList.artist.ImageAddress)) EQ "NO" >
-        <img class="img-thumbnail" src="http://placehold.it/200x200" alt="">
-      <cfelse>
-        <img src="#VARIABLES.artList.artist.ImageAddress#" alt="#VARIABLES.artList.artist.Name#" id="" class="img-profile" width="200px" height="200px"  style="margin: 10px;">
-      </cfif>
+      <cfoutput query="VARIABLES.artList.artist">
+        <cfif fileExists(expandPath(VARIABLES.artList.artist.ImageAddress)) EQ "NO" >
+          <img class="img-thumbnail" src="http://placehold.it/200x200" alt="">
+        <cfelse>
+          <img src="#VARIABLES.artList.artist.ImageAddress#" alt="#VARIABLES.artList.artist.Name#" id="" class="img-profile" width="200px" height="200px"  style="margin: 10px;">
+        </cfif>
 
-      <h3>#VARIABLES.artList.artist.Name#</h3>
-      <p>Address: #VARIABLES.artList.artist.Address#</p>
-      <p>Email: #VARIABLES.artList.artist.Email#</p>
-      <p>Contact: #VARIABLES.artList.artist.Contact#</p>
+        <h3>#VARIABLES.artList.artist.Name#</h3>
+        <p>Address: #VARIABLES.artList.artist.Address#</p>
+        <p>Email: #VARIABLES.artList.artist.Email#</p>
+        <p>Contact: #VARIABLES.artList.artist.Contact#</p>
 
-    </cfoutput>
-    <br>
-    <ul class="list-group">
-        <li class="list-group-item profile_details_button">Edit Profile</li>
-        <li class="list-group-item art_details_button">Art Details(JQUERY DATATABLE)</li>
-        <li class="list-group-item artyui_details_button">Art Details(YUI DATATABLE)</li>
-    </ul>
+      </cfoutput>
+    </div>
+    <hr>
+    <div class="list">
+      <ul class="list-group">
+          <li class="list-group-item profile_details_button">Edit Profile</li>
+          <li class="list-group-item art_details_button">Art Details(JQUERY DATATABLE)</li>
+          <li class="list-group-item artyui_details_button">Art Details(YUI DATATABLE)</li>
+      </ul>
+    </div>
   </div>
   <!--- end left side --->
 
@@ -83,7 +87,6 @@
         </div>
       </div>
       <!--- End update profile Image --->
-      <hr>
       <!--- Edit profile details form --->
       <cfoutput query="VARIABLES.artList.artist">
 
@@ -123,7 +126,7 @@
     <!--- End edit form --->
     <!--- Art details --->
     <div class="col-sm-12 col-md-11 col-lg-11 col-lg-offset-1 art_details table-responsive pull-right" id="datatable" style="display: none;">
-      <input type="text" name="search" class="search pull-right text-right" id="search" placeholder="Search...">
+      <input type="text" name="search" class="search pull-right" id="search" placeholder="Search...">
       <table id="artlist" class="table table-striped table-bordered" cellspacing="0" width="100%">
         <thead>
           <tr>
@@ -142,7 +145,7 @@
 
             <tr class="tableRow">
               <td>#counter#</td>
-              <td style="display: none; background-color: lightgray;"><img src="#VARIABLES.artList.art.ImageFile#" height="300" width="300"></td>
+              <td style="display: none; background-color: lightgray;"><img src="#VARIABLES.artList.art.ImageFile#" height="250" width="250"></td>
               <td>#VARIABLES.artList.art.ImageName#</td>
               <td>#VARIABLES.artList.art.ImageDescription#</td>
               <td>#VARIABLES.artList.art.CreatedOn#</td>
@@ -203,6 +206,8 @@
     var dtable = $('#artlist').DataTable({
       "dom": 't',
       "dom": 'p',
+      "pagingType": "simple",
+      "dom": "dt-responsive"
       });
     $('#search').keyup(function(){
       dtable.search($(this).val()).draw() ;
@@ -233,7 +238,7 @@ function format ( d ) {
         }
     } );
 } );
-</script> <img src="">
+</script>
 <!--- *************** DataTable constructor(YUI) ******************** --->
 <!-- Dependencies -->
 <script src="http://yui.yahooapis.com/2.9.0/build/yahoo-dom-event/yahoo-dom-event.js"></script>
