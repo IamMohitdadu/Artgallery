@@ -1,5 +1,5 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
+<!--- The content below is only a placeholder and can be replaced.-->
+<!-- <div style="text-align:center">
   <h1>
     Welcome to {{title}}!
   </h1>
@@ -17,5 +17,106 @@
     <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
   </li>
 </ul>
+ -->
+<!-- 
+<mat-menu #menu="matMenu">
+  <button mat-menu-item>
+    <mat-icon> dialpad </mat-icon>
+    <span> Redial </span>
+  </button>
+  <button mat-menu-item disabled>
+    <mat-icon> voicemail </mat-icon>
+    <span> Check voicemail </span>
+  </button>
+  <button mat-menu-item>
+    <mat-icon> notifications_off </mat-icon>
+    <span> Disable alerts </span>
+  </button>
+</mat-menu> -->
 
-<router-outlet></router-outlet>
+<!-- <nav class="navbar navbar-default navbar-fixed-top" *ngIf='shownav'> -->
+<nav class="navbar navbar-default" *ngIf='shownav'>
+  <div class="contailer-fluid">
+    <div class="navbar-header">
+      <!--  -->
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <!--  -->
+      <img width="50" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
+      <a class="navbar-brand">
+        <span class="logo">Arts Gallery</span>
+      </a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right" routerLinkActive="active" >
+        <li class=""><a routerLink="">Home<span class="sr-only">(current)</span></a></li>
+        <li><a routerLink="about/">Gallery</a></li>
+        <li *ngIf="!name"><a routerLink="login">Sign-in</a></li>
+        <li *ngIf="!name"><a routerLink="registration">Sign-Up</a></li>
+        <!-- <li *ngIf="name"><a routerLink="logout">{{ name }}</a></li> -->
+
+        <li *ngIf="name" class="dropdown" dropdown><a dropdownToggle role="button">{{ name }}<span class="caret"></span></a>
+          <ul *dropdownMenu class="dropdown-menu">
+            <li><a href="">My Profile</a></li>
+            <li><a href="">My Arts</a></li>
+            <li role="separator" class="divider"></li>
+            <li *ngIf="name"><a routerLink="logout">Logout</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- <div class="banner col-md-12 col-lg-12 col-sm-12">
+  <div class="col-left col-md-8 col-lg-8 col-sm-12">
+    <h1>Components</h1>
+    <p class="lead">
+      Over a dozen reusable components built to provide buttons, dropdowns, input groups, navigation, alerts, and much more.
+    </p>
+      Looks like you are using an AdBlocker, this makes hard for me to maintain
+      this project! 😞<br />
+      If you want to support BDM please whitelist this website or buy  
+  </div>
+  <div class="col-md-4 col-lg-4 col-sm-12">
+    <img src="https://static.pexels.com/photos/93589/pexels-photo-93589.jpeg" id="" class="banner-image"  />
+  </div>
+</div> -->
+<!-- 
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <span></span>
+    <span class="example-spacer"></span>
+    <mat-icon class="example-icon">favorite</mat-icon>
+    <mat-icon class="example-icon">delete</mat-icon>
+  </mat-toolbar-row>
+</mat-toolbar> -->
+<div class="main">
+  <router-outlet></router-outlet>
+</div>
+
+
+<!-- 
+<mat-card class="example-card">
+  <mat-card-header>
+    <div mat-card-avatar class="example-header-image"></div>
+    <mat-card-title>Shiba Inu</mat-card-title>
+    <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+  </mat-card-header>
+  <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+  <mat-card-content>
+    <p>
+      The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
+      A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
+      bred for hunting.
+    </p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button color="accent">LIKE</button>
+    <button mat-raised-button color="accent">SHARE</button>
+  </mat-card-actions>
+</mat-card> 
+--->

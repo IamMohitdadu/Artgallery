@@ -1,0 +1,118 @@
+
+<div class="container">
+  <div class="row">
+    <div class="col-xs-6 col-xs-offset-3 registration-form">
+      <h4 style="text-align:center;">Registration Detail</h4>
+      <span *ngIf="error" class="error">*{{error}}</span><br>
+      <form [formGroup]="registrationForm" (submit)="registration()" novalidate>
+        <div class="form-group">
+          <input type="text" class="form-control" formControlName="name" placeholder="Enter Name" required>
+        </div>      
+        <div class="form-group">
+          <input type="email" class="form-control" formControlName="email" placeholder="Email Address" required [email]="true">
+        </div>
+        <div class="form-group">
+          <input type="password" class="form-control" formControlName="password" placeholder="Password" required>
+        </div>
+        <div class="form-group">
+          <input type="password" class="form-control" formControlName="confirmPassword" placeholder="Confirm Password" required>
+        </div>
+        <div>
+          <input type="submit" [disabled]="!registrationForm.valid" class="btn btn-lg btn-primary btn-block" value="Submit" >
+        </div>
+      </form>
+      <p><a routerLink='/login' >Already have an account</a></p>
+    </div>
+  </div>
+</div>
+<p>Form value: {{ registrationForm.value | json }}</p>
+
+
+<!-- Registration Form -->
+
+<!-- <div class="container">
+  <div class="row">
+    <h4 style="text-align:center;">Registration Detail</h4>
+    <div class="col-xs-8 col-xs-offset-2 registration-form">
+      <span *ngIf="error" class="error">*{{error}}</span><br>
+      <form [formGroup]="registrationForm" (submit)="registration()" novalidate>
+        <div class="form-group">
+          <label class="center-block">First Name:
+            <input class="form-control" formControlName="first_name">
+          </label>
+        </div>
+        <div class="form-group">
+          <label class="center-block">Last Name:
+            <input class="form-control" formControlName="last_name">
+          </label>
+        </div>        
+        <div class="form-group">
+          <label class="center-block">Email Address:
+            <input class="form-control" formControlName="email">
+          </label>
+        </div>
+        <div class="form-group">
+          <label class="center-block">Password:
+            <input class="form-control" formControlName="password">
+          </label>
+        </div>
+        <div class="form-group">
+          <label class="center-block">Confirm Password:
+            <input class="form-control" formControlName="c_password">
+          </label>
+        </div>
+        <div class="form-group">
+          <label class="center-block">DOB:
+            <input class="form-control" formControlName="dob">
+          </label>
+        </div>
+        <div class="form-group">
+          <label class="center-block">Contact No.:
+            <input class="form-control" formControlName="contact">
+          </label>
+        </div>
+        <div class="form-group">
+          <label class="center-block">City:
+            <input class="form-control" formControlName="city">
+          </label>
+        </div>
+        <div class="form-group">
+          <label class="center-block">State:
+            <select class="form-control" formControlName="state">
+                <option *ngFor="let state of states" [value]="state">{{state}}</option>
+            </select>
+          </label>
+        </div>
+        <div class="form-group">
+          <label class="center-block">Country:
+            <select class="form-control" formControlName="country">
+                <option *ngFor="let state of states" [value]="state">{{country}}</option>
+            </select>
+          </label>
+        </div>
+        <div class="form-group">
+          <label class="center-block">Zip Code:
+            <input class="form-control" formControlName="zip">
+          </label>
+        </div>
+        <div class="form-group radio">
+          <h4>Gender:</h4>
+          <label class="center-block"><input type="radio" formControlName="gender" value="Male">Male</label>
+          <label class="center-block"><input type="radio" formControlName="gender" value="Female">Female</label>
+          <label class="center-block"><input type="radio" formControlName="gender" value="Other">Other</label>
+        </div>
+        <div class="form-group radio">
+          <h4>Are You:</h4>
+          <label class="center-block"><input type="radio" formControlName="u_type" value="Artist">Artist</label>
+          <label class="center-block"><input type="radio" formControlName="u_type" value="Normal User">Normal User</label>
+        </div>
+        <div>
+          <input type="submit" [disabled]="!registrationForm.valid" class="btn btn-lg btn-primary btn-block" value="Submit" >
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<p>Form value: {{ registrationForm.value | json }}</p>
+
+--->

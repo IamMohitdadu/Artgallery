@@ -1,0 +1,124 @@
+
+<div class="container-fluid">
+  <!-- Search bar -->
+  <div class="row" >
+    <div class="search-item pull-right" >
+      <i class="material-icons pull-right search-icon">search</i><input type="text" class="pull-right" name="search" [(ngModel)]="search" id="search" placeholder="Search name">
+    </div>
+  </div>
+  <!-- End Searchbar -->
+
+  <div *ngIf="this.result as lists else noData" class="col">
+    <div class="col-lg-2 col-md-2 col-sm-12 left-sidebar">
+      <ul>
+        <!-- <li class="artist-list" *ngFor="let list of lists.DATA" (click)="UserProfile(list)"> -->
+        <li [routerLink]="['about', list.USERID]" class="artist-list" *ngFor="let list of lists.DATA">
+          <span class="artist-list">{{ list.NAME | uppercase }}</span>
+        </li>
+      </ul>
+    </div>
+    <div class="col-md-8 col-sm-12 col-xs-12 main"> 
+      <!-- table list -->
+      <div class='panel panel-primary'>
+        <div class='panel-body'>
+          <div class='table-responsive'>
+            <table class='table'>
+              <tbody>
+                  <tr *ngFor="let list of lists.DATA | SearchPipe: 'NAME' : search">
+                    <td>
+                      <ul>
+                        <li><a [routerLink]="['about', list.USERID]">{{ list.EMAIL }}</a></li>
+                        <li>{{ list.NAME }}</li>
+                        <li>{{ list.USERID }}</li>
+                        <li>{{ list.ADDRESS }}</li>
+                        <li>{{ list.IMAGEADDRESS }}</li>
+                        <li>{{ list.CONTACT }}</li>
+                        <li>{{ list.COMMENT }}</li>
+                      </ul>
+                    </td>
+                  </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <!-- with image list -->
+      <div class="row">
+        <div class="artist-details col-md-3 col-lg-3 col-sm-5 clearfix" *ngFor="let list of lists.DATA">
+          <div class="gallery-hover-6col">
+            <span class="gallery-icons">
+              <a href="/assets/img/gallery/gallery-img-1-full.jpg" class="item-zoom-link lightbox" title="Custom Illustration" data-rel="prettyPhoto"></a>
+              <a href="gallery-single.htm" class="item-details-link"></a>
+            </span>
+          </div>
+          <a href="gallery-single.htm"><img src="/assets/img/author-avatar.jpg" alt="Gallery" height="200"></a>
+          <div class="project-details">
+            <a href="gallery-single.htm"> {{ list.NAME }} </a>{{ list.EMAIL }}.
+          </div>
+        </div>
+      </div> 
+    </div>
+    <div class="col-md-2 right-sidebar">
+      <div class="panel panel-primary">
+        <div class="panel-body">
+          <ul>
+            <li [routerLink]="['about', list.USERID]" class="artist-list" *ngFor="let list of lists.DATA">
+              <span class="artist-list">{{ list.NAME | uppercase }}</span>
+            </li>
+          </ul>
+        </div>        
+      </div>
+    </div>
+    <!-- <i class="fa fa-circle-o-notch fa-spin" style="font-size:24px"></i> -->
+    <!-- <ng-template #noData><div class="loading"></div>No Data Available</ng-template> -->
+  <ng-template #noData><div class=""></div>No Data Available</ng-template>
+</div>
+
+
+<div id="toTop" class="hidden-phone hidden-tablet" style="display: block;">Back to Top</div>
+
+
+<!-- 
+<div class="dac-section dac-gray">
+  <div class="wrap">
+    <div class="cols">
+      <div class="col-10of12 col-push-1of12">
+        <h1 class="dac-section-title">Build for a Multi-Screen World</h1>
+        <div class="dac-section-subtitle">
+          Android runs on billions of handheld devices around the world,
+          and it now supports these exciting, new form-factors.
+        </div>
+      </div>
+    </div>
+    <div class="resource-widget resource-flow-layout col-16"
+         data-query="collection:index/multiscreen"
+         data-cardSizes="6x6"
+         data-maxResults="3">
+    </div>
+  </div>
+</div>
+
+      <div class='panel panel-primary'>
+        <div class='panel-heading'>
+            <p>Artist List</p> 
+        </div>
+        <div class='panel-body'>
+          <div class='table-responsive'>
+            <table class='table'>
+              <thead>
+                  <tr>
+                    <th *ngFor="let list of lists.COLUMNS">{{list}}</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr *ngFor="let list of lists.DATA">
+                    <td></td>
+                  </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+ -->
+
+<!-- to top -->

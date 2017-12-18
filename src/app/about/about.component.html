@@ -1,0 +1,61 @@
+<p>
+  about works! Hi {{ Name }} <a href="" (click)='sendMeHome'>go back</a>
+</p>
+{{id}}
+{{userid}}
+
+
+
+<div class="container-fluid">
+  <div *ngIf="this.result as lists else noData" class="col">
+    <!-- <div class="col-lg-3 col-md-3 col-sm-12 right-sidebar">
+      <ul>
+          <li [routerLink]="['about', list.USERID]" class="artist-list" *ngFor="let list of lists.DATA" >
+            <span class="artist-list">{{ list.IMAGENAME | uppercase }}</span>
+          </li>
+      </ul>
+    </div> -->
+    <div class="col-md-10 col-sm-12 col-md-offset-1">
+<!--       <ul *ngIf="this.result as lists else noData">
+          <div>{{ lists.COLUMNS }} </div>
+        <li *ngFor="let list of lists.DATA">
+          <div class="list-item">
+            {{ list.USERID }}, {{ list.NAME }}, {{ list.EMAIL }}, {{ list.ADDRESS }}, {{ list.IMAGEADDRESS }}, {{ list.CONTACT }}, {{ list.COMMENT }} 
+          </div>
+          <div class="carousel">
+          </div>
+        </li>
+      </ul> -->
+      <div class='panel panel-primary'>
+        <div class='panel-heading'>
+            <p>Art List</p> 
+        </div>
+        <div class='panel-body'>
+          <div class='table-responsive'>
+            <table class='table'>
+              <thead>
+                  <tr>
+                      <th *ngFor="let list of lists.COLUMNS">{{list}}</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr *ngFor="let list of lists.DATA">
+                      <td>{{ list.IMAGEID }}</td>
+                      <td>{{ list.IMAGENAME }}</td>
+                      <td>{{ list.IMAGEDESCRIPTION }}</td>
+                      <td>{{ list.IMAGEFILE }}</td>
+                      <td>{{ list.CREATEDON }}</td>
+                      <td>{{ list.MODIFIEDON }}</td>
+                      <td>{{ list.USERID }}</td>
+                      <td>{{ list.STATUS }}</td>
+                  </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+    <ng-template #noData><div class="loading"></div>No Data Available</ng-template>
+</div>

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,18 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'app';
+  name:string;
+  shownav:boolean;
+
+  constructor( private router: Router) {
+   	this.isAuthenticated();
+    this.shownav = true;
+  }
+
+  isAuthenticated(){
+  	if (sessionStorage.getItem('Name')) {
+  		this.name = sessionStorage.getItem('Name');
+  	}
+  }
+
 }
