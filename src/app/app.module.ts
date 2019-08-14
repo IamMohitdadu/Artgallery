@@ -31,6 +31,9 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 // custom pipe
 import { ConvertToSpacePipe } from './convert-to-space.pipe';
 import { SearchPipe } from './search.pipe';
+import { GalleryComponent } from './gallery/gallery.component';
+import { ProfileComponent } from './profile/profile.component';
+import { MyartsComponent } from './myarts/myarts.component';
 
 // ==========
 
@@ -44,6 +47,9 @@ import { SearchPipe } from './search.pipe';
     LogoutComponent,
     PageNotFoundComponent,
     SearchPipe,
+    GalleryComponent,
+    ProfileComponent,
+    MyartsComponent,
   ],
 
   imports: [

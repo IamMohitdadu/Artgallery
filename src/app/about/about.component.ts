@@ -25,11 +25,10 @@ export class AboutComponent implements OnInit {
 
     if (this.id) {
       // http request to get user data
-      const httpGet$ = this.http.post('http://172.16.8.146:443/usermanagement/controller/userDetail.cfc?method=ListArts', this.id)
+      const httpGet = this.http.post('http://172.16.8.146:443/usermanagement/controller/artDetail.cfc?method=UserArtList', this.id)
                       .subscribe( resp => {this.result=resp; console.log(this.result)}  ,
                                   (error) => { console.log('error', error) });
 
-      console.log(httpGet$);
     }
   }
 
@@ -39,7 +38,6 @@ export class AboutComponent implements OnInit {
   }
 
 }
-
 
 // export class HomeComponent implements OnInit {
 

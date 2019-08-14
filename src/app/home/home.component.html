@@ -1,9 +1,19 @@
 
 <div class="container-fluid">
   <!-- Search bar -->
-  <div class="row" >
+  <div class="row pull-right" >
+    <span>Search By:</span>
+    <select class="search-type" name="searchType" id="searchType" [(ngModel)]="searchType">
+      <option value="NAME">Name</option>
+      <option value="EMAIL">Email</option>
+      <option value="USERID">User Id</option>
+      <option value="CONTACT">Contact Number</option>
+      <option value="ADDRESS">Address</option>
+      <option value="COMMENT">Comment</option>
+    </select>
     <div class="search-item pull-right" >
-      <i class="material-icons pull-right search-icon">search</i><input type="text" class="pull-right" name="search" [(ngModel)]="search" id="search" placeholder="Search name">
+      <i class="material-icons pull-right search-icon">search</i>
+      <input type="text" class="pull-right" name="search" [(ngModel)]="searchItem" id="search" placeholder="Search">
     </div>
   </div>
   <!-- End Searchbar -->
@@ -24,7 +34,7 @@
           <div class='table-responsive'>
             <table class='table'>
               <tbody>
-                  <tr *ngFor="let list of lists.DATA | SearchPipe: 'NAME' : search">
+                  <tr *ngFor="let list of lists.DATA | SearchPipe: searchType : searchItem">
                     <td>
                       <ul>
                         <li><a [routerLink]="['about', list.USERID]">{{ list.EMAIL }}</a></li>

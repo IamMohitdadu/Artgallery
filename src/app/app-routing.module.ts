@@ -6,6 +6,9 @@ import { LoginComponent } from './login/login.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { LogoutComponent } from './logout/logout.component';
 import { PageNotFoundComponent } from './not-found.component';
+import { GalleryComponent } from './gallery/gallery.component';
+import { ProfileComponent } from './profile/profile.component';
+import { MyartsComponent } from './myarts/myarts.component';
 
 const routes: Routes = [
   {
@@ -27,6 +30,19 @@ const routes: Routes = [
     path: 'about/:id',
     // canActivate: [AuthguardGuard],
     component: AboutComponent
+  },
+  {
+    path: 'gallery',
+    // canActivate: [AuthguardGuard],
+    component: GalleryComponent
+  },
+  {
+    path: 'profile',
+    component: ProfileComponent
+  },
+  {
+    path: 'myarts',
+    component: MyartsComponent
   },
   {
     path: 'login',

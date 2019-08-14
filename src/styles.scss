@@ -35,8 +35,10 @@
 body {
     overflow-x: hidden; /* Prevent scroll on narrow devices */
     background: url("./assets/bg.jpg");
-
+    // opacity: 0.5;
+    // filter: alpha(opacity=50); /* For IE8 and earlier */
 }
+
 nav.navbar {
 	border-radius: 0;
 }

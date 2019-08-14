@@ -53,15 +53,15 @@
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-right" routerLinkActive="active" >
         <li class=""><a routerLink="">Home<span class="sr-only">(current)</span></a></li>
-        <li><a routerLink="about/">Gallery</a></li>
+        <li><a routerLink="gallery/">Gallery</a></li>
         <li *ngIf="!name"><a routerLink="login">Sign-in</a></li>
         <li *ngIf="!name"><a routerLink="registration">Sign-Up</a></li>
         <!-- <li *ngIf="name"><a routerLink="logout">{{ name }}</a></li> -->
 
         <li *ngIf="name" class="dropdown" dropdown><a dropdownToggle role="button">{{ name }}<span class="caret"></span></a>
           <ul *dropdownMenu class="dropdown-menu">
-            <li><a href="">My Profile</a></li>
-            <li><a href="">My Arts</a></li>
+            <li><a routerLink="profile">My Profile</a></li>
+            <li><a routerLink="myarts">My Arts</a></li>
             <li role="separator" class="divider"></li>
             <li *ngIf="name"><a routerLink="logout">Logout</a></li>
           </ul>
@@ -97,26 +97,3 @@
 <div class="main">
   <router-outlet></router-outlet>
 </div>
-
-
-<!-- 
-<mat-card class="example-card">
-  <mat-card-header>
-    <div mat-card-avatar class="example-header-image"></div>
-    <mat-card-title>Shiba Inu</mat-card-title>
-    <mat-card-subtitle>Dog Breed</mat-card-subtitle>
-  </mat-card-header>
-  <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
-  <mat-card-content>
-    <p>
-      The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
-      A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
-      bred for hunting.
-    </p>
-  </mat-card-content>
-  <mat-card-actions>
-    <button mat-raised-button color="accent">LIKE</button>
-    <button mat-raised-button color="accent">SHARE</button>
-  </mat-card-actions>
-</mat-card> 
---->

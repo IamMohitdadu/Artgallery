@@ -1,0 +1,70 @@
+<p>
+  profile works!
+</p>
+<!-- Registration Form -->
+
+<div class="container">
+  <div class="row">
+    <div class="col-xs-6 col-xs-offset-6 edit-form">
+      <h4 style="text-align:center;">Edit Profile</h4>
+      <span *ngIf="error" class="error">*{{error}}</span><br>
+      <form [formGroup]="editForm" (submit)="editDetails()" novalidate>
+        <div class="form-group">
+          <input class="form-control" formControlName="first_name" placeholder="First Name">
+        </div>
+        <div class="form-group">
+          <input class="form-control" formControlName="last_name" placeholder="Last Name">
+        </div>        
+        <div class="form-group">
+          <input class="form-control" formControlName="email" placeholder="Email Address">
+        </div>
+        <div class="form-group">
+          <input class="form-control" formControlName="password" placeholder="Password">
+        </div>
+        <div class="form-group">
+          <input class="form-control" formControlName="c_password" placeholder="Confirm Password">
+        </div>
+        <div class="form-group">
+          <input class="form-control" formControlName="dob" placeholder="Date of Birth">
+        </div>
+        <div class="form-group">
+          <input class="form-control" formControlName="contact" placeholder="Contact Number">
+        </div>
+        <div class="form-group">
+          <input class="form-control" formControlName="city" placeholder="City">
+        </div>
+        <div class="form-group">
+          <select class="form-control" formControlName="state">
+            <option value="">Select City</option>
+            <option *ngFor="let state of states" [value]="state">{{state}}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <select class="form-control" formControlName="country">
+            <option value="">Select Country</option>
+            <option *ngFor="let state of states" [value]="state">{{country}}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <input class="form-control" formControlName="zip" placeholder="Zip Code">
+        </div>
+        <div class="form-group radio">
+          <h4>Gender:</h4>
+          <label class="center-block"><input type="radio" formControlName="gender" value="Male">Male</label>
+          <label class="center-block"><input type="radio" formControlName="gender" value="Female">Female</label>
+          <label class="center-block"><input type="radio" formControlName="gender" value="Other">Other</label>
+        </div>
+        <div class="form-group radio">
+          <h4>Are You:</h4>
+          <label class="center-block"><input type="radio" formControlName="u_type" value="Artist">Artist</label>
+          <label class="center-block"><input type="radio" formControlName="u_type" value="Normal User">Normal User</label>
+        </div>
+        <div>
+          <input type="submit" [disabled]="!editForm.valid" class="btn btn-lg btn-primary btn-block" value="Submit" >
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<p>Form value: {{ editForm.value | json }}</p>
+<p>Form status: {{ editForm.status }}</p>

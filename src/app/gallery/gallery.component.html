@@ -1,0 +1,89 @@
+<!-- Search bar -->
+<div class="container-fluid">
+  <div class="row pull-right clearfix" >
+    <div class="search-item pull-right" >
+      <i class="material-icons pull-right search-icon">search</i>
+      <input type="text" class="pull-right" name="search" [(ngModel)]="searchItem" id="search" placeholder="Search">
+    </div>
+  </div>
+</div>
+<!-- End Searchbar -->
+
+<div class="container">
+  <div *ngIf="this.result as lists else noData" class="col-sm-8 col-sm-offset-2 row">
+  	<div *ngFor="let list of lists.DATA | SearchPipe: 'IMAGENAME' : searchItem" class="arts col-sm-12 col-sm-offset-3">
+	    <mat-card class="example-card">
+			  <mat-card-header>
+			    <div mat-card-avatar class="example-header-image"></div>
+			    <mat-card-title>{{ list.IMAGENAME | uppercase }}</mat-card-title>
+			    <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+			  </mat-card-header>
+			  <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+			  <mat-card-content>
+			    <p>
+			      The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
+			      A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
+			      bred for hunting.
+			    </p>
+			  </mat-card-content>
+			  <mat-card-actions>
+			    <button mat-raised-button color="accent">LIKE</button>
+			    <button mat-raised-button color="accent">SHARE</button>
+			  </mat-card-actions>
+			</mat-card> 
+		</div>
+	</div>
+	<div class="pull-center">
+  	<ng-template #noData>No Data Available</ng-template>	
+  </div>
+</div>
+
+<div id="toTop" class="hidden-phone hidden-tablet" style="display: block;">Back to Top</div>
+
+ <!--  	<div class='panel panel-primary'>
+        <div class='panel-heading'>
+            <p>Art List</p> 
+        </div>
+        <div class='panel-body'>
+          <div class='table-responsive'>
+            <table class='table'>
+              <thead>
+                  <tr>
+                      <th *ngFor="let list of lists.COLUMNS">{{list}}</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr *ngFor="let list of lists.DATA">
+                      <td>{{ list.IMAGEID }}</td>
+                      <td>{{ list.IMAGENAME }}</td>
+                      <td>{{ list.IMAGEDESCRIPTION }}</td>
+                      <td>{{ list.IMAGEFILE }}</td>
+                      <td>{{ list.CREATEDON }}</td>
+                      <td>{{ list.MODIFIEDON }}</td>
+                      <td>{{ list.USERID }}</td>
+                      <td>{{ list.STATUS }}</td>
+                  </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div> -->
+
+
+<!-- 
+    <div class="col-md-8 col-sm-12 col-xs-12 main"> 
+      <div class="row">
+        <div class="artist-details col-md-3 col-lg-3 col-sm-5 clearfix" *ngFor="let list of lists.DATA | SearchPipe: searchType : searchItem">
+          <div class="gallery-hover-6col">
+            <span class="gallery-icons">
+              <a href="./assets/img/gallery/gallery-img-1-full.jpg" class="item-zoom-link lightbox" title="Custom Illustration" data-rel="prettyPhoto"></a>
+              <a href="gallery-single.htm" class="item-details-link"></a>
+            </span>
+          </div>
+          <a href="gallery-single.htm"><img src="/assets/img/author-avatar.jpg" alt="Gallery" height="200"></a>
+          <div class="project-details">
+            <a href="gallery-single.htm"> {{ list.IMAGEID }} </a>{{ list.IMAGENAME }}.
+          </div>
+        </div>
+      </div> 
+    </div> -->

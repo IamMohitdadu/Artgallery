@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { AuthService } from '../services/auth.service';
 import { PasswordValidation } from '../services/password-validation';
 
 @Component({
@@ -14,6 +13,7 @@ import { PasswordValidation } from '../services/password-validation';
 export class RegistrationComponent implements OnInit {
  
   registrationForm: FormGroup;
+  error: string;
   
   registrationTemplate() {
     this.registrationForm = this.fb.group({
@@ -26,7 +26,7 @@ export class RegistrationComponent implements OnInit {
     });
   }
 
-  constructor(private auth:AuthService, private fb:FormBuilder, private router: Router, private http: HttpClient) {
+  constructor(private fb:FormBuilder, private router: Router, private http: HttpClient) {
     // check for user already login
     // this.auth.isAuthenticated();
     this.registrationTemplate(); 
@@ -47,7 +47,7 @@ export class RegistrationComponent implements OnInit {
 
     // api request
     this.http.post('http://172.16.8.146:443/usermanagement/controller/userController.cfc?method=registerUser', jsondata)
-        .subscribe( (res) =>{console.log(res); this.CheckAfterRegisteration(res);}
+        .subscribe( (res) =>{console.log(res); this.CheckAfterRegisteration(res);},
                   (error) => { console.log('error', error) });
     } //end registration 
 
@@ -62,9 +62,7 @@ export class RegistrationComponent implements OnInit {
 
 }
 
-
 /*
-
  registrationTemplate() {
     this.registrationForm = this.fb.group({
       first_name: ['', Validators.required ],

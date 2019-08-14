@@ -1,31 +1,39 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-xs-6 col-xs-offset-3 registration-form">
-      <h4 style="text-align:center;">Registration Detail</h4>
-      <span *ngIf="error" class="error">*{{error}}</span><br>
-      <form [formGroup]="registrationForm" (submit)="registration()" novalidate>
-        <div class="form-group">
-          <input type="text" class="form-control" formControlName="name" placeholder="Enter Name" required>
-        </div>      
-        <div class="form-group">
-          <input type="email" class="form-control" formControlName="email" placeholder="Email Address" required [email]="true">
-        </div>
-        <div class="form-group">
-          <input type="password" class="form-control" formControlName="password" placeholder="Password" required>
-        </div>
-        <div class="form-group">
-          <input type="password" class="form-control" formControlName="confirmPassword" placeholder="Confirm Password" required>
-        </div>
-        <div>
-          <input type="submit" [disabled]="!registrationForm.valid" class="btn btn-lg btn-primary btn-block" value="Submit" >
-        </div>
-      </form>
-      <p><a routerLink='/login' >Already have an account</a></p>
+    <div class="col-xs-4 col-xs-offset-4">
+      <h1 class="text-center signup-title">Create new account</h1>
+      <div class="account-wall">
+        <img id="profile-img" class="profile-img" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
+        <span *ngIf="error" class="error">*{{error}}</span><br>
+        <form class="form-signup" [formGroup]="registrationForm" (submit)="registration()" novalidate>
+          <div class="form-group">
+            <input type="text" class="form-control" formControlName="name" placeholder="Enter Name" required>
+          </div>      
+          <div class="form-group">
+            <input type="email" class="form-control" formControlName="email" placeholder="Email Address" required [email]="true">
+          </div>
+          <div class="form-group">
+            <input type="password" class="form-control" formControlName="password" placeholder="Password" required>
+          </div>
+          <div class="form-group">
+            <input type="password" class="form-control" formControlName="confirmPassword" placeholder="Confirm Password" required>
+          </div>
+          <div class="form-group">
+            <input type="submit" [disabled]="!registrationForm.valid" class="btn btn-lg btn-primary btn-block" value="Submit" >
+          </div>
+        </form>
+        <p class="text-center"><a routerLink='/login' >Already have an account</a></p>
+      </div>
+    </div>
+    <div class="col-sm-6 col-md-4 col-md-offset-4">
+      <br><br>
+      <p>Form value: {{ registrationForm.value | json }}</p>
+      <p>Form status: {{ registrationForm.status | json }}</p>
     </div>
   </div>
 </div>
-<p>Form value: {{ registrationForm.value | json }}</p>
+
 
 
 <!-- Registration Form -->
